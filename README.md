@@ -7,7 +7,7 @@ Event website, served at https://phired.se via GitHub Pages.
 | `index.html` | Front page |
 | `companies.html` | Company directory (reads `data/companies.js`) |
 | `privacy.html` | How sign-up emails are used. Fill in the `[bracketed]` parts before sign-up opens |
-| `data/companies.js` | Company profiles. Copy a block to add a company |
+| `data/companies.js` | Exhibitor profiles. Copy a block to add one |
 | `js/site.js` | Sign-up form and directory code. The sign-up settings are at the top |
 | `style/style.css` | Styles |
 | `images/` | Favicon, logos (put company logos in `images/companies/`) |
@@ -15,18 +15,17 @@ Event website, served at https://phired.se via GitHub Pages.
 
 ## Quick edits
 
-- **Event date / countdown:** top of `js/site.js` (`EVENT.start`). Set `confirmed: true` when the date is official.
-- **2026 photos:** save them as `images/2026/fair-floor.jpg`, `booth.jpg`, `workshop.jpg`, `funding.jpg`, `team.jpg`. They replace the placeholders automatically. Landscape, about 1600px wide, under 400 KB each.
-- **2026 exhibitor wall:** `PHIRED_2026` list at the bottom of `data/companies.js`. Add `logo: "images/logos/name.svg"` to show a logo instead of the name.
+- **Event date / countdown:** top of `js/site.js` (`EVENT.start`). Set `timeConfirmed: true` when the 2027 opening time is official.
+- **Photos:** `images/2026/`. Landscape, about 1600px wide, under 400 KB each. `images/og.jpg` (1200x630) is the link preview image.
+- **Exhibitors:** `data/companies.js` feeds both the exhibitors page and the "Who came in 2026" wall. When the 2027 line-up is confirmed, update the list and the headings that say 2026.
 
 Search the files for `TODO` to find placeholders that still need real content.
 
-## Adding a company
+## Adding an exhibitor
 
 1. Open `data/companies.js` and copy one `{ ... }` block (including the comma between blocks).
-2. Fill in the fields. Delete `example: true` for real companies.
-3. Put the logo in `images/companies/` and set `logo: "images/companies/name.svg"`, or leave `""` to show initials.
-4. When all example companies are gone, remove the yellow note near the top of `companies.html`.
+2. Fill in the fields; leave any text as `""` to hide it. Use `sponsor: "Silver sponsor"` etc. for sponsors.
+3. Optional logo: put it in `images/logos/` and set `logo: "images/logos/name.svg"`. Without it, initials are shown.
 
 ## Connecting the email sign-up to a Google Form
 

@@ -2,12 +2,11 @@
 
 /* ------------------------------------------------------------------
    EVENT DATE (drives the countdown on the front page)
-   Set "confirmed" to true once the date is official.
 ------------------------------------------------------------------- */
 var EVENT = {
-  start: "2027-03-18T10:00:00+01:00", // PROVISIONAL – replace with the real date and time
-  confirmed: false,
-  place: "KTH Campus, Stockholm"
+  start: "2027-02-02T12:00:00+01:00", // date confirmed; 12:00 is last year's opening time
+  timeConfirmed: false,               // set to true when the 2027 opening time is official
+  place: "Nymble, KTH Campus"
 };
 
 /* ------------------------------------------------------------------
@@ -23,6 +22,22 @@ var SIGNUP_FORM = {
     role: "entry.0000000002"   // the Google Form question for "I am a..."
   }
 };
+
+/* Shared helpers */
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+  });
+}
+function initials(name) {
+  return name.split(/\s+/).slice(0, 2).map(function (w) { return w[0]; }).join('').toUpperCase();
+}
+function sortCompanies(arr) {
+  var rank = function (c) { return /silver|gold|main/i.test(c.sponsor || '') ? 0 : (c.sponsor ? 1 : 2); };
+  return arr.slice().sort(function (a, b) {
+    return rank(a) - rank(b) || a.name.localeCompare(b.name, 'sv');
+  });
+}
 
 (function signup() {
   var form = document.getElementById('register');
@@ -76,30 +91,19 @@ var SIGNUP_FORM = {
   var list = document.getElementById('company-list');
   if (!list || !window.PHIRED_COMPANIES) return;
 
-  var companies = window.PHIRED_COMPANIES.slice().sort(function (a, b) {
-    return a.name.localeCompare(b.name, 'sv');
-  });
+  var companies = sortCompanies(window.PHIRED_COMPANIES);
   var search = document.getElementById('company-search');
   var filterBox = document.getElementById('area-filters');
   var count = document.getElementById('company-count');
   var active = null;
 
-  function esc(s) {
-    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
-    });
-  }
-  function initials(name) {
-    return name.split(/\s+/).slice(0, 2).map(function (w) { return w[0]; }).join('').toUpperCase();
-  }
-
-  // Filter buttons from all research areas
+  // Filter buttons from all areas
   var areas = [];
   companies.forEach(function (c) {
     (c.areas || []).forEach(function (a) { if (areas.indexOf(a) < 0) areas.push(a); });
   });
   areas.sort(function (a, b) { return a.localeCompare(b); });
-  filterBox.innerHTML = ['All areas'].concat(areas).map(function (a, i) {
+  filterBox.innerHTML = ['All'].concat(areas).map(function (a, i) {
     return '<button type="button" class="filter" aria-pressed="' + (i === 0) + '" data-area="' + (i === 0 ? '' : esc(a)) + '">' + esc(a) + '</button>';
   }).join('');
 
@@ -114,35 +118,37 @@ var SIGNUP_FORM = {
   });
   search.addEventListener('input', render);
 
+  function section(title, text) {
+    return text ? '<div><h3>' + title + '</h3><p>' + esc(text) + '</p></div>' : '';
+  }
+
   function card(c, i) {
     var logo = c.logo
       ? '<img class="co-logo" src="' + esc(c.logo) + '" alt="">'
       : '<span class="co-logo co-mono tone-' + (i % 3) + '" aria-hidden="true">' + esc(initials(c.name)) + '</span>';
     var links = [
       ['Website', c.links && c.links.website],
-      ['Careers', c.links && c.links.careers],
-      ['LinkedIn', c.links && c.links.linkedin]
+      ['LinkedIn', c.links && c.links.linkedin],
+      ['Careers', c.links && c.links.careers]
     ].filter(function (l) { return l[1]; }).map(function (l) {
-      return '<a href="' + esc(l[1]) + '" target="_blank" rel="noopener">' + l[0] + '</a>';
+      return '<a href="' + esc(l[1]) + '" target="_blank" rel="noopener">' + l[0] + '<span class="visually-hidden"> for ' + esc(c.name) + ' (opens in a new tab)</span></a>';
     }).join('');
+    var body = section('About', c.about) + section('At the fair', c.meet) + section('Looking for', c.lookingFor) +
+      (links ? '<div class="co-links">' + links + '</div>' : '');
 
     return '' +
       '<li><details class="co">' +
         '<summary>' + logo +
           '<span class="co-head">' +
-            '<span class="co-name">' + esc(c.name) + (c.example ? ' <span class="co-example">Example</span>' : '') + '</span>' +
+            '<span class="co-name">' + esc(c.name) +
+              (c.sponsor ? ' <span class="co-badge">' + esc(c.sponsor) + '</span>' : '') +
+              (c.example ? ' <span class="co-example">Example</span>' : '') + '</span>' +
             '<span class="co-line">' + esc(c.oneLiner) + '</span>' +
             '<span class="co-tags">' + (c.areas || []).map(function (a) { return '<span>' + esc(a) + '</span>'; }).join('') + '</span>' +
           '</span>' +
-          '<span class="co-meta">' + (c.booth ? '<span>Booth ' + esc(c.booth) + '</span>' : '') + (c.location ? '<span>' + esc(c.location) + '</span>' : '') + '</span>' +
+          '<span class="co-meta">' + (c.type ? '<span>' + esc(c.type) + '</span>' : '') + '</span>' +
         '</summary>' +
-        '<div class="co-body">' +
-          '<div><h3>Research</h3><p>' + esc(c.about) + '</p></div>' +
-          '<div><h3>At the fair</h3><p>' + esc(c.teams) + '</p></div>' +
-          '<div><h3>Looking for</h3><p>' + esc(c.lookingFor) + '</p></div>' +
-          (c.positions && c.positions.length ? '<div><h3>Typical roles</h3><ul>' + c.positions.map(function (p) { return '<li>' + esc(p) + '</li>'; }).join('') + '</ul></div>' : '') +
-          (links ? '<div class="co-links">' + links + '</div>' : '') +
-        '</div>' +
+        '<div class="co-body">' + body + '</div>' +
       '</details></li>';
   }
 
@@ -151,13 +157,13 @@ var SIGNUP_FORM = {
     var shown = companies.filter(function (c) {
       if (active && (c.areas || []).indexOf(active) < 0) return false;
       if (!q) return true;
-      return [c.name, c.oneLiner, c.about, c.lookingFor, (c.areas || []).join(' '), (c.positions || []).join(' ')]
+      return [c.name, c.type, c.oneLiner, c.about, c.meet, c.lookingFor, (c.areas || []).join(' ')]
         .join(' ').toLowerCase().indexOf(q) >= 0;
     });
     list.innerHTML = shown.map(card).join('');
     count.textContent = shown.length === companies.length
-      ? companies.length + ' companies'
-      : shown.length + ' of ' + companies.length + ' companies';
+      ? companies.length + ' organisations'
+      : shown.length + ' of ' + companies.length + ' organisations';
     document.getElementById('no-results').hidden = shown.length > 0;
   }
 
@@ -180,10 +186,10 @@ var SIGNUP_FORM = {
   var label = document.getElementById('event-date-label');
   var note = document.getElementById('countdown-note');
   var sr = document.getElementById('countdown-sr');
-  label.textContent = (EVENT.confirmed ? dateText : 'Spring 2027') + ', ' + EVENT.place;
-  note.textContent = EVENT.confirmed
-    ? 'Until doors open on ' + dateText + ' at ' + start.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) + '.'
-    : 'Counting down to the provisional date, ' + dateText + '. Final date coming soon.';
+  label.textContent = dateText + ', ' + EVENT.place;
+  note.textContent = EVENT.timeConfirmed
+    ? 'Until doors open at ' + start.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) + ' on ' + dateText + '.'
+    : 'Until ' + dateText + '. Opening time to be confirmed.';
 
   var els = {};
   box.querySelectorAll('.cd-num').forEach(function (el) { els[el.getAttribute('data-unit')] = el; });
@@ -219,20 +225,16 @@ var SIGNUP_FORM = {
 ------------------------------------------------------------------- */
 (function wall() {
   var box = document.getElementById('wall-2026');
-  if (!box || !window.PHIRED_2026) return;
-  function esc(s) {
-    return String(s).replace(/[&<>"']/g, function (c) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
-    });
-  }
-  var list = window.PHIRED_2026.slice().sort(function (a, b) {
-    if ((a.type === 'sponsor') !== (b.type === 'sponsor')) return a.type === 'sponsor' ? -1 : 1;
-    return a.name.localeCompare(b.name, 'sv');
-  });
-  box.innerHTML = '<ul>' + list.map(function (o) {
+  if (!box || !window.PHIRED_COMPANIES) return;
+  function tile(o) {
+    var url = o.links && (o.links.linkedin || o.links.website);
     var inner = o.logo ? '<img src="' + esc(o.logo) + '" alt="' + esc(o.name) + '">' : '<span>' + esc(o.name) + '</span>';
-    if (o.type === 'sponsor') inner += '<em>Sponsor</em>';
-    var cls = o.type === 'sponsor' ? ' class="is-sponsor"' : '';
-    return '<li' + cls + '>' + (o.url ? '<a href="' + esc(o.url) + '" target="_blank" rel="noopener">' + inner + '</a>' : '<div>' + inner + '</div>') + '</li>';
-  }).join('') + '</ul>';
+    if (o.sponsor) inner += '<em>' + esc(o.sponsor) + '</em>';
+    return '<li>' + (url ? '<a href="' + esc(url) + '" target="_blank" rel="noopener">' + inner + '</a>' : '<div>' + inner + '</div>') + '</li>';
+  }
+  var all = sortCompanies(window.PHIRED_COMPANIES);
+  var sponsors = all.filter(function (o) { return o.sponsor; });
+  var others = all.filter(function (o) { return !o.sponsor; });
+  box.innerHTML = (sponsors.length ? '<ul class="wall-sponsors" aria-label="Sponsors">' + sponsors.map(tile).join('') + '</ul>' : '') +
+    '<ul aria-label="Exhibitors">' + others.map(tile).join('') + '</ul>';
 })();
