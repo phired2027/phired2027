@@ -1,4 +1,14 @@
-/* PhiRED 2027 site scripts */
+/* PhireD KTH 2027 site scripts */
+
+/* ------------------------------------------------------------------
+   EVENT DATE (drives the countdown on the front page)
+   Set "confirmed" to true once the date is official.
+------------------------------------------------------------------- */
+var EVENT = {
+  start: "2027-03-18T10:00:00+01:00", // PROVISIONAL – replace with the real date and time
+  confirmed: false,
+  place: "KTH Campus, Stockholm"
+};
 
 /* ------------------------------------------------------------------
    EMAIL SIGN-UP SETTINGS
@@ -157,4 +167,72 @@ var SIGNUP_FORM = {
   });
 
   render();
+})();
+
+/* ------------------------------------------------------------------
+   COUNTDOWN (index.html)
+------------------------------------------------------------------- */
+(function countdown() {
+  var box = document.getElementById('countdown');
+  if (!box) return;
+  var start = new Date(EVENT.start);
+  var dateText = start.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  var label = document.getElementById('event-date-label');
+  var note = document.getElementById('countdown-note');
+  var sr = document.getElementById('countdown-sr');
+  label.textContent = (EVENT.confirmed ? dateText : 'Spring 2027') + ', ' + EVENT.place;
+  note.textContent = EVENT.confirmed
+    ? 'Until doors open on ' + dateText + ' at ' + start.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) + '.'
+    : 'Counting down to the provisional date, ' + dateText + '. Final date coming soon.';
+
+  var els = {};
+  box.querySelectorAll('.cd-num').forEach(function (el) { els[el.getAttribute('data-unit')] = el; });
+  function pad(n) { return n < 10 ? '0' + n : String(n); }
+
+  function tick() {
+    var ms = start - new Date();
+    if (ms <= 0) {
+      box.classList.add('cd-done');
+      var ended = ms < -8 * 3600 * 1000;
+      note.textContent = ended ? 'PhireD KTH 2027 has taken place. Thank you for coming!' : 'PhireD KTH 2027 is happening now. Welcome!';
+      sr.textContent = note.textContent;
+      return false;
+    }
+    var s = Math.floor(ms / 1000);
+    var d = Math.floor(s / 86400); s -= d * 86400;
+    var h = Math.floor(s / 3600); s -= h * 3600;
+    var m = Math.floor(s / 60); s -= m * 60;
+    els.days.textContent = d;
+    els.hours.textContent = pad(h);
+    els.minutes.textContent = pad(m);
+    els.seconds.textContent = pad(s);
+    sr.textContent = d + ' days until PhireD KTH 2027.';
+    return true;
+  }
+  if (tick()) {
+    var timer = setInterval(function () { if (!tick()) clearInterval(timer); }, 1000);
+  }
+})();
+
+/* ------------------------------------------------------------------
+   2026 EXHIBITOR WALL (index.html and companies.html)
+------------------------------------------------------------------- */
+(function wall() {
+  var box = document.getElementById('wall-2026');
+  if (!box || !window.PHIRED_2026) return;
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  var list = window.PHIRED_2026.slice().sort(function (a, b) {
+    if ((a.type === 'sponsor') !== (b.type === 'sponsor')) return a.type === 'sponsor' ? -1 : 1;
+    return a.name.localeCompare(b.name, 'sv');
+  });
+  box.innerHTML = '<ul>' + list.map(function (o) {
+    var inner = o.logo ? '<img src="' + esc(o.logo) + '" alt="' + esc(o.name) + '">' : '<span>' + esc(o.name) + '</span>';
+    if (o.type === 'sponsor') inner += '<em>Sponsor</em>';
+    var cls = o.type === 'sponsor' ? ' class="is-sponsor"' : '';
+    return '<li' + cls + '>' + (o.url ? '<a href="' + esc(o.url) + '" target="_blank" rel="noopener">' + inner + '</a>' : '<div>' + inner + '</div>') + '</li>';
+  }).join('') + '</ul>';
 })();

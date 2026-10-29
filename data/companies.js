@@ -1,5 +1,5 @@
 /*
-  Company profiles for companies.html
+  Company profiles for companies.html (2027 exhibitors)
   ------------------------------------
   To add a company, copy one block { ... } and fill it in.
   - "example": true shows an "Example" label. Remove it (or set false) for real exhibitors.
@@ -92,4 +92,40 @@ window.PHIRED_COMPANIES = [
     positions: ["Climate risk scientist", "Data scientist"],
     links: { website: "https://example.com", careers: "", linkedin: "https://example.com" }
   }
+];
+
+/*
+  Organisations at PhireD KTH 2026 (shown in the "Exhibitors 2026" wall).
+  - type: "sponsor" shows them first with a "Sponsor" label.
+  - logo: optional, e.g. "images/logos/abb.svg". Without it the name is shown as text.
+*/
+window.PHIRED_2026 = [
+  { name: "FOI", type: "sponsor", url: "https://www.linkedin.com/company/foi/" },
+  { name: "Westinghouse", type: "sponsor", url: "https://www.linkedin.com/company/westinghouse-electric-company/" },
+  { name: "ABB", url: "https://www.linkedin.com/company/abb/" },
+  { name: "Alstom", url: "https://www.linkedin.com/company/alstom/" },
+  { name: "Blykalla", url: "https://www.linkedin.com/company/blykalla/" },
+  { name: "BrainZell", url: "https://www.linkedin.com/company/brainzell/" },
+  { name: "COMSOL", url: "https://www.linkedin.com/company/comsol-inc-/" },
+  { name: "Electrolux Group", url: "https://www.linkedin.com/company/electroluxgroup/" },
+  { name: "Ericsson", url: "https://www.linkedin.com/company/ericsson/" },
+  { name: "EURAXESS Sweden", url: "https://www.linkedin.com/company/euraxess-sweden/" },
+  { name: "EURES Sweden, Arbetsförmedlingen", url: "" },
+  { name: "Huawei Sweden R&D", url: "https://www.linkedin.com/company/huawei-sweden-r-d/" },
+  { name: "KTH Career", url: "" },
+  { name: "KTH Innovation", url: "https://www.linkedin.com/company/kth-innovation/" },
+  { name: "KTH Relocation", url: "" },
+  { name: "NKT", url: "https://www.linkedin.com/company/nkt-cables/" },
+  { name: "RISE", url: "https://www.linkedin.com/company/rise-research-institutes-of-sweden/" },
+  { name: "SEI", url: "https://www.linkedin.com/company/stockholm-environment-institute/" },
+  { name: "Siemens Energy", url: "https://www.linkedin.com/company/siemens-energy/" },
+  { name: "SMHI", url: "https://www.linkedin.com/company/smhi/" },
+  { name: "SSF", url: "" },
+  { name: "Stegra", url: "https://www.linkedin.com/company/stegraab/" },
+  { name: "Studsvik", url: "https://www.linkedin.com/company/studsvik/" },
+  { name: "Swerim", url: "https://www.linkedin.com/company/swerim/" },
+  { name: "Switch to Sweden", url: "https://www.linkedin.com/company/linkoping-science-park/" },
+  { name: "Vattenfall", url: "https://www.linkedin.com/company/vattenfall/" },
+  { name: "Venture Cup", url: "https://www.linkedin.com/company/venture-cup-sweden/" },
+  { name: "Swedish Research Council", url: "https://www.linkedin.com/company/swedish-research-council/" }
 ];

@@ -1,4 +1,4 @@
-# PhiRED 2027
+# PhireD KTH 2027
 
 Event website, served at https://phired.se via GitHub Pages.
 
@@ -12,6 +12,12 @@ Event website, served at https://phired.se via GitHub Pages.
 | `style/style.css` | Styles |
 | `images/` | Favicon, logos (put company logos in `images/companies/`) |
 | `CNAME` | Custom domain for GitHub Pages. Keep this file |
+
+## Quick edits
+
+- **Event date / countdown:** top of `js/site.js` (`EVENT.start`). Set `confirmed: true` when the date is official.
+- **2026 photos:** save them as `images/2026/fair-floor.jpg`, `booth.jpg`, `workshop.jpg`, `funding.jpg`, `team.jpg`. They replace the placeholders automatically. Landscape, about 1600px wide, under 400 KB each.
+- **2026 exhibitor wall:** `PHIRED_2026` list at the bottom of `data/companies.js`. Add `logo: "images/logos/name.svg"` to show a logo instead of the name.
 
 Search the files for `TODO` to find placeholders that still need real content.
 
