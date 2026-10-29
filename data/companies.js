@@ -1,5 +1,5 @@
 /*
-  Exhibitors shown on companies.html and in the "Who came in 2026" wall on the front page.
+  Exhibitors shown on companies.html and in the "Meet the exhibitors" wall on the front page.
   -------------------------------------------------------------------------------------
   To add an exhibitor, copy one { ... } block (keep the comma between blocks).
   - sponsor: "Silver sponsor", "Bronze sponsor" ... or "" for none. Sponsors are listed first.
@@ -7,9 +7,9 @@
   - areas:   tags used for the filter buttons. Reuse existing spellings so filters stay short.
   - logo:    optional, e.g. "images/logos/abb.svg". Without it, initials are shown.
   - Any text field can be left "" and is then hidden.
-  When 2027 exhibitors are confirmed, change EXHIBITOR_YEAR and replace the list.
+  Based on the latest confirmed line-up; update as exhibitors confirm or cancel.
 */
-window.EXHIBITOR_YEAR = 2026;
+window.EXHIBITOR_YEAR = 2027;
 
 window.PHIRED_COMPANIES = [
   {
@@ -119,7 +119,7 @@ window.PHIRED_COMPANIES = [
     name: "KTH Career",
     type: "KTH",
     areas: ["Careers and mobility"],
-    oneLiner: "Career support at KTH. Ran the CV feedback booth at PhireD 2026.",
+    oneLiner: "Career support at KTH. Runs the CV feedback booth at PhireD.",
     links: { website: "https://www.kth.se/en" }
   },
   {
@@ -167,7 +167,7 @@ window.PHIRED_COMPANIES = [
     areas: ["Climate and environment", "Simulation and software", "AI and data"],
     oneLiner: "Sweden's expert authority on weather, water and climate.",
     about: "Numerical weather models for the Nordic region, remote sensing, climate analysis and air quality. Strong focus on high-resolution simulation, data assimilation, digital twins and machine learning.",
-    meet: "In 2026: researchers from SMHI's meteorological research and development group.",
+    meet: "Researchers from SMHI's meteorological research and development group.",
     links: { linkedin: "https://www.linkedin.com/company/smhi/" }
   },
   {

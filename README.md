@@ -10,6 +10,7 @@ Event website, served at https://phired.se via GitHub Pages.
 | `data/companies.js` | Exhibitor profiles. Copy a block to add one |
 | `js/site.js` | Sign-up form and directory code. The sign-up settings are at the top |
 | `style/style.css` | Styles |
+| `fonts/` | Self-hosted fonts (Bricolage Grotesque, Instrument Sans; SIL Open Font License) |
 | `images/` | Favicon, logos (put company logos in `images/companies/`) |
 | `CNAME` | Custom domain for GitHub Pages. Keep this file |
 
@@ -18,6 +19,8 @@ Event website, served at https://phired.se via GitHub Pages.
 - **Event date / countdown:** top of `js/site.js` (`EVENT.start`). Set `timeConfirmed: true` when the 2027 opening time is official.
 - **Photos:** `images/2026/`. Landscape, about 1600px wide, under 400 KB each. `images/og.jpg` (1200x630) is the link preview image.
 - **Exhibitors:** `data/companies.js` feeds both the exhibitors page and the "Who came in 2026" wall. When the 2027 line-up is confirmed, update the list and the headings that say 2026.
+
+- **After changing CSS or JS:** bump the `?v=...` number on the `style.css`, `site.js` and `companies.js` links in the three HTML files, so browsers fetch the new version instead of an old cached one.
 
 Search the files for `TODO` to find placeholders that still need real content.
 

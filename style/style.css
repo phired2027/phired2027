@@ -1,5 +1,19 @@
 /* PhireD KTH 2027 */
 
+/* Fonts are hosted here (SIL Open Font License, see fonts/OFL-*.txt) */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("../fonts/bricolage-grotesque.woff") format("woff");
+  font-weight: 200 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Instrument Sans";
+  src: url("../fonts/instrument-sans.woff") format("woff");
+  font-weight: 400 700;
+  font-display: swap;
+}
+
 :root {
   --paper: #f6f7fb;
   --ink: #161a3d;
@@ -36,7 +50,7 @@ h1, h2, h3 {
   font-family: var(--display);
   line-height: 1.05;
   margin: 0 0 0.5em;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 h2 { font-size: clamp(1.75rem, 3.4vw, 2.5rem); font-weight: 800; }
 h3 { font-size: 1.2rem; font-weight: 600; letter-spacing: -0.01em; }
@@ -94,8 +108,8 @@ a { color: var(--signal); }
 .hero h1 {
   font-size: clamp(3rem, 8.2vw, 6.4rem);
   font-weight: 800;
-  letter-spacing: -0.045em;
-  line-height: 0.95;
+  letter-spacing: -0.02em;
+  line-height: 0.98;
   margin-bottom: 0.35em;
 }
 .lead { font-size: clamp(1.15rem, 1.8vw, 1.35rem); color: var(--ink-soft); max-width: 34ch; }
@@ -223,7 +237,7 @@ a { color: var(--signal); }
 
 /* Sub-page header */
 .page-head { padding: clamp(48px, 7vw, 88px) 0 clamp(32px, 4vw, 48px); }
-.page-head h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); font-weight: 800; letter-spacing: -0.04em; line-height: 0.98; }
+.page-head h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1; }
 .page-head .lead { max-width: 58ch; }
 .notice {
   display: inline-block; margin-top: 8px;
@@ -261,7 +275,7 @@ a { color: var(--signal); }
 .co summary::-webkit-details-marker { display: none; }
 .co summary:hover .co-name { color: var(--signal); }
 .co-logo { width: 64px; height: 64px; border-radius: 16px; object-fit: contain; background: var(--white); border: 1px solid var(--line); }
-.co-mono { display: grid; place-items: center; font: 800 1.3rem var(--display); letter-spacing: -0.02em; border: 0; }
+.co-mono { display: grid; place-items: center; font: 800 1.3rem var(--display); border: 0; }
 .tone-0 { background: var(--signal); color: var(--white); }
 .tone-1 { background: var(--ink); color: var(--white); }
 .tone-2 { background: var(--marigold); color: var(--ink); }
@@ -326,7 +340,7 @@ a { color: var(--signal); }
   display: grid; justify-items: center; min-width: 112px; padding: 16px 18px 12px;
   border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 18px; background: rgba(255, 255, 255, 0.05);
 }
-.cd-num { font: 800 clamp(2.2rem, 4.6vw, 3.6rem)/1 var(--display); font-variant-numeric: tabular-nums; letter-spacing: -0.03em; }
+.cd-num { font: 800 clamp(2.2rem, 4.6vw, 3.6rem)/1 var(--display); font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
 .cd-units > div:last-child .cd-num { color: var(--marigold); }
 .cd-label { font-size: 0.9rem; color: #c9cbe0; margin-top: 6px; }
 .cd-note { margin: 12px 0 0; font-size: 0.92rem; color: #a7aacb; }
@@ -344,7 +358,7 @@ a { color: var(--signal); }
 .stats-inner { display: grid; grid-template-columns: repeat(4, 1fr); }
 .stats-inner > div { display: grid; gap: 4px; padding: 28px 24px; border-left: 1px solid var(--line); }
 .stats-inner > div:first-child { border-left: 0; padding-left: 0; }
-.stat-num { font: 800 clamp(2rem, 3.6vw, 2.8rem)/1 var(--display); color: var(--signal); letter-spacing: -0.03em; }
+.stat-num { font: 800 clamp(2rem, 3.6vw, 2.8rem)/1 var(--display); color: var(--signal); letter-spacing: -0.01em; }
 .stat-label { color: var(--ink-soft); font-size: 0.95rem; line-height: 1.4; }
 
 /* Why */
@@ -355,7 +369,7 @@ a { color: var(--signal); }
 .dots { display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px; max-width: 200px; }
 .dots i { aspect-ratio: 1; border-radius: 50%; background: var(--line); }
 .dots i.on { background: var(--marigold); }
-.figure-num { font: 800 clamp(2.6rem, 5vw, 3.6rem)/1 var(--display); letter-spacing: -0.04em; margin: 20px 0 8px; }
+.figure-num { font: 800 clamp(2.6rem, 5vw, 3.6rem)/1 var(--display); letter-spacing: -0.015em; margin: 20px 0 8px; }
 .figure-stat figcaption { color: var(--ink-soft); font-size: 0.98rem; line-height: 1.5; }
 .source { display: block; margin-top: 8px; font-size: 0.82rem; color: #8a8fae; }
 

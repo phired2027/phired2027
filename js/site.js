@@ -221,10 +221,10 @@ function sortCompanies(arr) {
 })();
 
 /* ------------------------------------------------------------------
-   2026 EXHIBITOR WALL (index.html and companies.html)
+   EXHIBITOR WALL (index.html and companies.html)
 ------------------------------------------------------------------- */
 (function wall() {
-  var box = document.getElementById('wall-2026');
+  var box = document.getElementById('exhibitor-wall');
   if (!box || !window.PHIRED_COMPANIES) return;
   function tile(o) {
     var url = o.links && (o.links.linkedin || o.links.website);
