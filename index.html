@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PhiRED 2027 – Meet the R&amp;D teams that hire PhDs</title>
+  <meta name="description" content="PhiRED 2027 is a one-day career fair where PhD students and postdocs meet companies' R&amp;D teams. KTH Campus, Stockholm, spring 2027.">
+
+  <!-- Link previews (LinkedIn, Slack, WhatsApp). Add a 1200x630 image at images/og.png when you have one. -->
+  <meta property="og:title" content="PhiRED 2027 – Meet the R&amp;D teams that hire PhDs">
+  <meta property="og:description" content="A career fair where PhD researchers talk to the scientists and engineers in companies' R&amp;D teams. KTH Campus, Stockholm, spring 2027.">
+  <meta property="og:url" content="https://phired.se/">
+  <meta property="og:type" content="website">
+  <!-- <meta property="og:image" content="https://phired.se/images/og.png"> -->
+
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="./" aria-label="PhiRED 2027 home">
+        <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+          <ellipse cx="20" cy="20" rx="13" ry="10" />
+          <line x1="20" y1="3" x2="20" y2="37" />
+        </svg>
+        <span>PhiRED <b>2027</b></span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="./#about">About</a>
+        <a href="companies.html">Companies</a>
+        <a href="./#programme">Programme</a>
+        <a href="./#faq">FAQ</a>
+      </nav>
+      <a class="btn btn-small" href="./#register">Get reminders</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <p class="hero-when">
+            <span class="chip">Spring 2027</span>
+            KTH Campus, Stockholm
+          </p>
+          <h1>From thesis to job&nbsp;offer.</h1>
+          <p class="lead">
+            A one-day career fair where PhD students and postdocs talk to the
+            people in companies' R&amp;D teams, not only to recruiters.
+          </p>
+
+          <form class="signup" id="register" novalidate>
+            <label for="email">Get the date, a reminder and the programme by email</label>
+            <div class="signup-row">
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="you@university.se" required>
+              <button class="btn" type="submit">Keep me posted</button>
+            </div>
+            <div class="signup-extra">
+              <label class="inline" for="role">I'm a</label>
+              <select id="role" name="role">
+                <option>PhD student</option>
+                <option>Postdoc</option>
+                <option>Master's student</option>
+                <option>Company representative</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <label class="consent" for="consent">
+              <input id="consent" name="consent" type="checkbox" required>
+              <span>Email me about PhiRED 2027: the date, a reminder before the fair and a short feedback form afterwards. <a href="privacy.html">How we use your email</a></span>
+            </label>
+            <p class="signup-msg" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <svg class="phi" viewBox="0 0 400 560" aria-hidden="true">
+          <line class="phi-stem" x1="200" y1="24" x2="200" y2="536" pathLength="1" />
+          <ellipse class="phi-bowl" cx="200" cy="280" rx="168" ry="128" pathLength="1" />
+          <circle class="phi-dot" cx="368" cy="280" r="14" />
+        </svg>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="wrap two-col">
+        <div>
+          <h2>Talk research with the people who do it</h2>
+          <p>
+            At most career fairs, companies send HR. That's fine for a first job,
+            but it's hard to explain a thesis on hydrogen reduction kinetics to someone
+            who can't tell you what the lab down the corridor works on.
+          </p>
+          <p>
+            At PhiRED, every company brings people from its R&amp;D team: the
+            scientists and engineers you'd work with. You can talk about methods,
+            open problems and what research looks like in industry, and they can
+            see what you bring beyond a CV.
+          </p>
+          <p><a class="text-link" href="companies.html">See which companies are coming</a></p>
+        </div>
+        <dl class="facts">
+          <div><dt>When</dt><dd>Spring 2027, date announced soon</dd></div>
+          <div><dt>Where</dt><dd>KTH Campus, Stockholm</dd></div>
+          <div><dt>Who</dt><dd>PhD students, postdocs and companies' R&amp;D teams</dd></div>
+          <div><dt>Cost</dt><dd>Free for visitors</dd></div>
+          <div><dt>Language</dt><dd>English</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- AUDIENCES -->
+    <section class="section audiences">
+      <div class="wrap split">
+        <article class="panel panel-light" id="phds">
+          <h2>For PhDs and postdocs</h2>
+          <ul>
+            <li>Talk to researchers and engineers from companies' R&amp;D teams</li>
+            <li>Read each company's research profile before you come</li>
+            <li>Get feedback on how to describe your thesis to industry</li>
+            <li>Hear from alumni who moved from academia to industry</li>
+          </ul>
+          <a class="btn" href="companies.html">Browse companies</a>
+        </article>
+
+        <article class="panel panel-dark" id="companies">
+          <h2>For companies</h2>
+          <ul>
+            <li>Meet doctoral researchers across engineering, science and technology</li>
+            <li>Bring people from your R&amp;D team, with HR alongside if you like</li>
+            <li>Get a research profile on our companies page, read by visitors before the fair</li>
+            <li>Limited number of booths</li>
+          </ul>
+          <!-- TODO: replace with your real contact address -->
+          <a class="btn btn-invert" href="mailto:hello@phired.se?subject=Exhibiting%20at%20PhiRED%202027">Email us about exhibiting</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROGRAMME -->
+    <section class="section" id="programme">
+      <div class="wrap">
+        <h2>Preliminary programme</h2>
+        <p class="section-intro">Times and speakers will be confirmed closer to the event.</p>
+        <ol class="timeline">
+          <li><time>10:00</time><div><h3>Doors open</h3><p>Pick up your badge and a map of the exhibitors.</p></div></li>
+          <li><time>10:30</time><div><h3>Opening talk</h3><p>Speaker to be announced.</p></div></li>
+          <li><time>11:00</time><div><h3>Fair floor opens</h3><p>Company booths open until 16:00.</p></div></li>
+          <li><time>13:00</time><div><h3>Panel: life after the PhD</h3><p>Researchers who moved to industry share what they wish they had known.</p></div></li>
+          <li><time>16:00</time><div><h3>Mingle</h3><p>Drinks and informal conversations with exhibitors.</p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section faq" id="faq">
+      <div class="wrap narrow">
+        <h2>Questions</h2>
+        <details>
+          <summary>Who will I meet from the companies?</summary>
+          <p>People from their R&amp;D teams: research scientists, engineers and team leads. Some companies also bring a recruiter. Each company's profile says who's coming.</p>
+        </details>
+        <details>
+          <summary>Who can attend?</summary>
+          <p>PhD students and postdocs from any university. Master's students who are considering a PhD are welcome too.</p>
+        </details>
+        <details>
+          <summary>Does it cost anything?</summary>
+          <p>No. Visiting PhiRED is free.</p>
+        </details>
+        <details>
+          <summary>Do I need to register?</summary>
+          <p>Not to visit the fair. Leave your email above to get the date, a reminder before the fair and the programme.</p>
+        </details>
+        <details>
+          <summary>How can my company take part?</summary>
+          <p>Email <a href="mailto:hello@phired.se">hello@phired.se</a> and we'll send you the exhibitor information. You can also <a href="companies.html#add-profile">send us your company profile</a> right away.</p>
+        </details>
+        <details>
+          <summary>Will the event be in English?</summary>
+          <p>Yes. All talks and the panel are held in English.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- ORGANISERS -->
+    <section class="section organisers">
+      <div class="wrap">
+        <h2>Organised by</h2>
+        <!-- TODO: replace each placeholder with <a href="..."><img src="images/partner.svg" alt="Partner name"></a> -->
+        <ul class="logos">
+          <li>Organiser logo</li>
+          <li>Partner logo</li>
+          <li>Partner logo</li>
+          <li>Partner logo</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div>
+        <p class="footer-brand">PhiRED 2027</p>
+        <p>Career fair connecting PhD researchers with R&amp;D teams<br>KTH Campus, Stockholm</p>
+      </div>
+      <div>
+        <p class="footer-head">Contact</p>
+        <p><a href="mailto:hello@phired.se">hello@phired.se</a><br><a href="privacy.html">Privacy</a></p>
+      </div>
+      <div>
+        <p class="footer-head">Follow</p>
+        <!-- TODO: add real profile links -->
+        <p><a href="#">LinkedIn</a><br><a href="#">Instagram</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/site.js"></script>
+</body>
+</html>

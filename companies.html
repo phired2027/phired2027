@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Companies – PhiRED 2027</title>
+  <meta name="description" content="The companies at PhiRED 2027: what their R&amp;D teams work on, who they bring to the fair and which PhD backgrounds they're looking for.">
+  <meta property="og:title" content="Companies at PhiRED 2027">
+  <meta property="og:description" content="What each company's R&amp;D team works on, and who they bring to the fair.">
+  <meta property="og:url" content="https://phired.se/companies.html">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="./" aria-label="PhiRED 2027 home">
+        <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+          <ellipse cx="20" cy="20" rx="13" ry="10" />
+          <line x1="20" y1="3" x2="20" y2="37" />
+        </svg>
+        <span>PhiRED <b>2027</b></span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="./#about">About</a>
+        <a href="companies.html" aria-current="page">Companies</a>
+        <a href="./#programme">Programme</a>
+        <a href="./#faq">FAQ</a>
+      </nav>
+      <a class="btn btn-small" href="./#register">Get reminders</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-head">
+      <div class="wrap">
+        <h1>Meet the companies</h1>
+        <p class="lead">
+          What each company's R&amp;D team works on, who they're bringing to the fair
+          and which PhD backgrounds they're looking for. Read up before you come, and
+          you'll have better conversations on the day.
+        </p>
+        <!-- TODO: remove this note once real companies are added -->
+        <p class="notice">These are example profiles showing the format. Real exhibitors will appear here as they confirm.</p>
+      </div>
+    </section>
+
+    <section class="directory">
+      <div class="wrap">
+        <div class="dir-controls">
+          <label class="visually-hidden" for="company-search">Search companies</label>
+          <input id="company-search" type="search" placeholder="Search companies, topics or roles" autocomplete="off">
+          <div class="filters" id="area-filters" role="group" aria-label="Filter by research area"></div>
+        </div>
+
+        <p class="dir-count" id="company-count" aria-live="polite"></p>
+        <ul class="company-list" id="company-list"></ul>
+        <div class="no-results" id="no-results" hidden>
+          <p>No companies match that search yet.</p>
+          <button type="button" class="btn btn-ghost" id="clear-filters">Clear search and filters</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section add-profile" id="add-profile">
+      <div class="wrap two-col">
+        <div>
+          <h2>Exhibiting? Send us your profile</h2>
+          <p>
+            Visitors use this page to decide who to talk to. Tell them about your
+            research, not your benefits package. Email us the details listed here
+            and we'll publish your profile within a few days.
+          </p>
+          <!-- TODO: replace with your real contact address -->
+          <a class="btn" href="mailto:hello@phired.se?subject=Company%20profile%20for%20PhiRED%202027&amp;body=Company%20name%3A%0AOne%20sentence%20on%20what%20you%20do%20in%20science%3A%0AResearch%20areas%20(2-4)%3A%0AWhat%20your%20R%26D%20team%20works%20on%20(2-3%20sentences)%3A%0AWho%20from%20R%26D%20is%20coming%20to%20the%20fair%3A%0APhD%20backgrounds%20you're%20looking%20for%3A%0ATypical%20roles%20for%20PhDs%3A%0AWebsite%3A%0ACareers%20page%3A%0ALinkedIn%3A%0A%0A(Attach%20your%20logo%20as%20SVG%20or%20PNG.)">Email your profile</a>
+          <p class="small">The button opens an email with the questions filled in.</p>
+        </div>
+        <dl class="facts">
+          <div><dt>Summary</dt><dd>One sentence on what you do in science</dd></div>
+          <div><dt>Areas</dt><dd>Two to four research areas</dd></div>
+          <div><dt>Research</dt><dd>What your R&amp;D team works on, in two or three sentences</dd></div>
+          <div><dt>At the fair</dt><dd>Who from R&amp;D will be at your booth</dd></div>
+          <div><dt>Looking for</dt><dd>PhD backgrounds that fit your team</dd></div>
+          <div><dt>Roles</dt><dd>Typical positions for PhDs</dd></div>
+          <div><dt>Links</dt><dd>Website, careers page, LinkedIn and your logo</dd></div>
+        </dl>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div>
+        <p class="footer-brand">PhiRED 2027</p>
+        <p>Career fair connecting PhD researchers with R&amp;D teams<br>KTH Campus, Stockholm</p>
+      </div>
+      <div>
+        <p class="footer-head">Contact</p>
+        <p><a href="mailto:hello@phired.se">hello@phired.se</a><br><a href="privacy.html">Privacy</a></p>
+      </div>
+      <div>
+        <p class="footer-head">Follow</p>
+        <!-- TODO: add real profile links -->
+        <p><a href="#">LinkedIn</a><br><a href="#">Instagram</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="data/companies.js"></script>
+  <script src="js/site.js"></script>
+</body>
+</html>
