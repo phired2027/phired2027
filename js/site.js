@@ -101,6 +101,59 @@ function companyLinks(c) {
 }
 
 /* ------------------------------------------------------------------
+   COMPANY POP-UP (shared by the front-page wall and the exhibitors page)
+   showCompany(list, index) opens one company; the arrows (or ← →) step
+   through the same list.
+------------------------------------------------------------------- */
+var showCompany = (function () {
+  var dialog = document.getElementById('co-dialog');
+  if (!dialog || typeof dialog.showModal !== 'function') return null;
+  var content = dialog.querySelector('.dlg-content');
+  var list = [], at = 0;
+
+  function block(title, text) {
+    return text ? '<section class="dlg-block"><h4>' + title + '</h4><p>' + esc(text) + '</p></section>' : '';
+  }
+  function draw() {
+    var c = list[at];
+    var links = companyLinks(c);
+    var logo = c.logo
+      ? '<img src="' + esc(c.logo) + '" alt="">'
+      : '<span class="dlg-mono">' + esc(initials(c.name)) + '</span>';
+    content.innerHTML =
+      '<div class="dlg-hero">' + logo + '</div>' +
+      '<div class="dlg-body">' +
+        '<p class="dlg-type">' + esc(c.type || '') + (c.sponsor ? ' <span class="co-badge">' + esc(c.sponsor) + '</span>' : '') + '</p>' +
+        '<h3 id="co-dialog-title">' + esc(c.name) + '</h3>' +
+        '<p class="dlg-line">' + esc(c.oneLiner) + '</p>' +
+        ((c.areas || []).length ? '<p class="co-tags">' + c.areas.map(function (a) { return '<span>' + esc(a) + '</span>'; }).join('') + '</p>' : '') +
+        block('About', c.about) + block('At the fair', c.meet) + block('Looking for', c.lookingFor) +
+        (links ? '<p class="co-links">' + links + '</p>' : '') +
+      '</div>' +
+      (list.length > 1 ? '<div class="dlg-nav"><button type="button" class="dlg-prev" aria-label="Previous company">←</button>' +
+        '<span>' + (at + 1) + ' / ' + list.length + '</span>' +
+        '<button type="button" class="dlg-next" aria-label="Next company">→</button></div>' : '');
+    dialog.scrollTop = 0;
+  }
+  function step(d) { at = (at + d + list.length) % list.length; draw(); }
+
+  dialog.addEventListener('click', function (e) {
+    if (e.target === dialog || e.target.closest('.dlg-close')) dialog.close();
+    else if (e.target.closest('.dlg-prev')) step(-1);
+    else if (e.target.closest('.dlg-next')) step(1);
+  });
+  dialog.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') step(-1);
+    if (e.key === 'ArrowRight') step(1);
+  });
+  return function (items, index) {
+    list = items; at = index;
+    draw();
+    if (!dialog.open) dialog.showModal();
+  };
+})();
+
+/* ------------------------------------------------------------------
    REGISTER BUTTONS
 ------------------------------------------------------------------- */
 (function register() {
@@ -229,32 +282,28 @@ function companyLinks(c) {
   });
   search.addEventListener('input', render);
 
-  function section(title, text) {
-    return text ? '<div><h3>' + title + '</h3><p>' + esc(text) + '</p></div>' : '';
-  }
+  var shownList = [];
 
   function card(c, i) {
     var logo = c.logo
-      ? '<img class="co-logo" src="' + esc(c.logo) + '" alt="">'
-      : '<span class="co-logo co-mono tone-' + (i % 3) + '" aria-hidden="true">' + esc(initials(c.name)) + '</span>';
-    var links = companyLinks(c);
-    var body = section('About', c.about) + section('At the fair', c.meet) + section('Looking for', c.lookingFor) +
-      (links ? '<div class="co-links">' + links + '</div>' : '');
-
-    return '' +
-      '<li><details class="co" id="' + esc(slug(c.name)) + '">' +
-        '<summary>' + logo +
-          '<span class="co-head">' +
-            '<span class="co-name">' + esc(c.name) +
-              (c.sponsor ? ' <span class="co-badge">' + esc(c.sponsor) + '</span>' : '') + '</span>' +
-            '<span class="co-line">' + esc(c.oneLiner) + '</span>' +
-            '<span class="co-tags">' + (c.areas || []).map(function (a) { return '<span>' + esc(a) + '</span>'; }).join('') + '</span>' +
-          '</span>' +
-          '<span class="co-meta">' + (c.type ? '<span>' + esc(c.type) + '</span>' : '') + '</span>' +
-        '</summary>' +
-        '<div class="co-body">' + body + '</div>' +
-      '</details></li>';
+      ? '<img src="' + esc(c.logo) + '" alt="" loading="lazy">'
+      : '<span class="co-mono tone-' + (i % 3) + '">' + esc(initials(c.name)) + '</span>';
+    return '<li><button type="button" class="co-card' + (c.sponsor ? ' co-card-sponsor' : '') + '" data-i="' + i + '" aria-haspopup="dialog">' +
+      '<span class="co-card-logo">' + logo + '</span>' +
+      '<span class="co-card-body">' +
+        '<span class="co-card-top"><span>' + esc(c.type || '') + '</span>' + (c.sponsor ? '<span class="co-badge">' + esc(c.sponsor) + '</span>' : '') + '</span>' +
+        '<span class="co-name">' + esc(c.name) + '</span>' +
+        '<span class="co-line">' + esc(c.oneLiner) + '</span>' +
+        '<span class="co-tags">' + (c.areas || []).map(function (a) { return '<span>' + esc(a) + '</span>'; }).join('') + '</span>' +
+      '</span>' +
+      '<span class="co-card-more" aria-hidden="true">Read more <b>→</b></span>' +
+    '</button></li>';
   }
+
+  list.addEventListener('click', function (e) {
+    var b = e.target.closest('.co-card');
+    if (b && showCompany) showCompany(shownList, +b.getAttribute('data-i'));
+  });
 
   function render() {
     var q = search.value.trim().toLowerCase();
@@ -264,6 +313,7 @@ function companyLinks(c) {
       return [c.name, c.type, c.oneLiner, c.about, c.meet, c.lookingFor, (c.areas || []).join(' ')]
         .join(' ').toLowerCase().indexOf(q) >= 0;
     });
+    shownList = shown;
     list.innerHTML = shown.map(card).join('');
     count.hidden = companies.length === 0;
     count.textContent = shown.length === companies.length
@@ -329,7 +379,6 @@ function slug(s) {
 ------------------------------------------------------------------- */
 (function wall() {
   var box = document.getElementById('exhibitor-wall');
-  var dialog = document.getElementById('co-dialog');
   if (!box) return;
   var all = sortCompanies(exhibitors(2026));
 
@@ -359,26 +408,9 @@ function slug(s) {
   }).join('');
   box.innerHTML = (sponsors.length ? '<ul class="wall-sponsors" aria-label="Sponsors">' + sponsors.join('') + '</ul>' : '') + tickers;
 
-  if (!dialog || typeof dialog.showModal !== 'function') return;
-  var content = dialog.querySelector('.dlg-content');
-
   box.addEventListener('click', function (e) {
     var btn = e.target.closest('button[data-i]');
-    if (!btn) return;
-    var c = all[+btn.getAttribute('data-i')];
-    var links = companyLinks(c);
-    content.innerHTML =
-      '<p class="dlg-type">' + esc(c.type || '') + (c.sponsor ? ' · ' + esc(c.sponsor) : '') + '</p>' +
-      '<h3 id="co-dialog-title">' + esc(c.name) + '</h3>' +
-      '<p class="dlg-line">' + esc(c.oneLiner) + '</p>' +
-      (c.about ? '<p>' + esc(c.about) + '</p>' : '') +
-      (c.lookingFor ? '<p><b>Looking for:</b> ' + esc(c.lookingFor) + '</p>' : '') +
-      ((c.areas || []).length ? '<p class="co-tags">' + c.areas.map(function (a) { return '<span>' + esc(a) + '</span>'; }).join('') + '</p>' : '') +
-      (links ? '<p class="co-links">' + links + '</p>' : '');
-    dialog.showModal();
-  });
-  dialog.addEventListener('click', function (e) {
-    if (e.target === dialog || e.target.closest('.dlg-close')) dialog.close();
+    if (btn && showCompany) showCompany(all, +btn.getAttribute('data-i'));
   });
 })();
 
