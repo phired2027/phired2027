@@ -18,7 +18,7 @@
   <link rel="icon" href="images/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
   <link rel="preload" href="fonts/bricolage-grotesque.woff" as="font" type="font/woff" crossorigin>
-  <link rel="stylesheet" href="style/style.css?v=20261113-3">
+  <link rel="stylesheet" href="style/style.css?v=20261113-4">
 </head>
 <body id="top">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -171,15 +171,11 @@
     <!-- WORKSHOPS CALENDAR -->
     <section class="section" id="workshops">
       <div class="wrap">
-        <h2>Workshops before the fair</h2>
-        <p class="section-intro">Free workshops to help you get ready. Pick a marked day in the calendar, or scroll the list, and sign up.</p>
+        <h2>Workshops and the fair</h2>
+        <p class="section-intro">Free workshops in January to get you ready, then the fair on 2 February. Click a marked day to jump to it.</p>
         <div class="cal-wrap">
           <div class="cal" aria-label="Workshop calendar">
-            <div class="cal-head">
-              <button type="button" class="cal-nav" id="cal-prev" aria-label="Previous month">‹</button>
-              <p class="cal-title" id="cal-title" aria-live="polite"></p>
-              <button type="button" class="cal-nav" id="cal-next" aria-label="Next month">›</button>
-            </div>
+            <p class="cal-title" id="cal-title"></p>
             <div class="cal-grid" id="cal-grid"></div>
             <p class="cal-legend"><span class="key key-ws"></span>Workshop <span class="key key-fair"></span>Career fair</p>
           </div>
@@ -277,49 +273,27 @@
       </div>
     </section>
 
-    <!-- ORGANISER -->
-    <section class="section organiser">
-      <div class="wrap organiser-inner">
-        <div>
-          <h2>Organised by PhDs, for PhDs</h2>
-          <p>PhireD KTH is run by volunteers from <a href="https://www.dr.kth.se/">Dr/THS, the PhD Chapter at KTH</a>. 2027 is the third edition.</p>
-        </div>
-        <a class="chapter-logo" href="https://www.dr.kth.se/">
-          <img src="images/phd-chapter-logo.png" alt="" width="104" height="120">
-          <span>PhD Chapter at KTH</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- TEAM -->
-    <section class="section team-section" aria-labelledby="team-title">
-      <div class="wrap">
-        <h2 id="team-title">The PhireD 2027 committee</h2>
-        <p class="section-intro">The volunteers who make the fair happen.</p>
-        <!-- To add someone, copy one <li> block. For a photo, replace the <span class="avatar"> with
-             <img class="avatar" src="images/team/name.jpg" alt=""> -->
-        <ul class="team">
-          <li>
-            <span class="avatar" aria-hidden="true">KO</span>
-            <p class="team-name">Kamila Oppelová</p>
-            <p class="team-role">Project Manager</p>
-          </li>
-          <li>
-            <span class="avatar" aria-hidden="true">CR</span>
-            <p class="team-name">Company Relations Team</p>
-            <p class="team-role"><a href="mailto:phired-fair@dr.kth.se">phired-fair@dr.kth.se</a></p>
-          </li>
-        </ul>
-      </div>
-    </section>
 
   </main>
 
   <footer class="site-footer">
-    <div class="wrap footer-inner">
+    <div class="wrap footer-grid">
+      <div class="footer-org">
+        <a class="footer-chapter" href="https://www.dr.kth.se/" aria-label="Dr/THS, the PhD Chapter at KTH">
+          <img src="images/phd-chapter-logo.png" alt="" width="70" height="81">
+        </a>
+        <div>
+          <p class="footer-brand">Organised by PhDs, for PhDs</p>
+          <p>PhireD KTH is run by volunteers from <a href="https://www.dr.kth.se/">Dr/THS, the PhD Chapter at KTH</a>. 2027 is the third edition.</p>
+        </div>
+      </div>
       <div>
-        <p class="footer-brand">PhireD KTH 2027</p>
-        <p>The career fair for PhD students and postdocs<br>2 February 2027, 13:00–15:00, Nymble, KTH Campus</p>
+        <p class="footer-head">The 2027 committee</p>
+        <!-- To credit someone, add a <li>Name <span>Role</span></li> -->
+        <ul class="footer-team">
+          <li>Kamila Oppelová <span>Project Manager</span></li>
+          <li>Company Relations Team <span>phired-fair@dr.kth.se</span></li>
+        </ul>
       </div>
       <div>
         <p class="footer-head">Contact</p>
@@ -330,9 +304,12 @@
         <p><a href="https://www.linkedin.com/company/phired-kth/">LinkedIn</a><br><a href="https://www.dr.kth.se/">PhD Chapter</a></p>
       </div>
     </div>
+    <div class="wrap footer-bottom">
+      <p>PhireD KTH 2027 · Tuesday 2 February 2027, 13:00–15:00 · Nymble, KTH Campus, Stockholm</p>
+    </div>
   </footer>
 
-  <script src="data/companies.js?v=20261113-3"></script>
-  <script src="js/site.js?v=20261113-3"></script>
+  <script src="data/companies.js?v=20261113-4"></script>
+  <script src="js/site.js?v=20261113-4"></script>
 </body>
 </html>

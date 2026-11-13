@@ -332,15 +332,31 @@ function slug(s) {
   if (!box) return;
   var all = sortCompanies(exhibitors(2026));
 
-  function tile(o, i) {
-    var inner = o.logo ? '<img src="' + esc(o.logo) + '" alt="' + esc(o.name) + '">' : '<span>' + esc(o.name) + '</span>';
-    if (o.sponsor) inner += '<em>' + esc(o.sponsor) + '</em>';
-    return '<li><button type="button" data-i="' + i + '" aria-haspopup="dialog">' + inner + '</button></li>';
+  function face(o) {
+    return o.logo
+      ? '<img src="' + esc(o.logo) + '" alt="' + esc(o.name) + '" loading="lazy">'
+      : '<span class="wm">' + esc(o.short || o.name) + '</span>';
   }
-  var sponsors = [], others = [];
-  all.forEach(function (o, i) { (o.sponsor ? sponsors : others).push(tile(o, i)); });
-  box.innerHTML = (sponsors.length ? '<ul class="wall-sponsors" aria-label="Sponsors">' + sponsors.join('') + '</ul>' : '') +
-    '<ul aria-label="Exhibitors">' + others.join('') + '</ul>';
+  // Copies made only to loop the ticker are hidden from screen readers and the keyboard.
+  function tile(o, i, copy) {
+    return '<li' + (copy ? ' aria-hidden="true"' : '') + '><button type="button" data-i="' + i + '" aria-haspopup="dialog"' +
+      (copy ? ' tabindex="-1"' : '') + ' title="' + esc(o.name) + '">' + face(o) + '</button></li>';
+  }
+  var sponsors = [], rows = [[], []];
+  all.forEach(function (o, i) {
+    if (o.sponsor) {
+      sponsors.push('<li><button type="button" data-i="' + i + '" aria-haspopup="dialog">' +
+        '<span class="sp-logo">' + face(o) + '</span><em>' + esc(o.sponsor) + '</em></button></li>');
+    } else {
+      rows[rows[0].length <= rows[1].length ? 0 : 1].push(i);
+    }
+  });
+  var tickers = rows.map(function (row, r) {
+    var once = row.map(function (i) { return tile(all[i], i, false); }).join('');
+    var copy = row.map(function (i) { return tile(all[i], i, true); }).join('');
+    return '<div class="ticker' + (r ? ' ticker-rev' : '') + '"><ul class="ticker-track" aria-label="' + (r ? 'More exhibitors' : 'Exhibitors') + '">' + once + copy + '</ul></div>';
+  }).join('');
+  box.innerHTML = (sponsors.length ? '<ul class="wall-sponsors" aria-label="Sponsors">' + sponsors.join('') + '</ul>' : '') + tickers;
 
   if (!dialog || typeof dialog.showModal !== 'function') return;
   var content = dialog.querySelector('.dlg-content');
@@ -374,62 +390,63 @@ function slug(s) {
   if (!grid || !list) return;
 
   var title = document.getElementById('cal-title');
-  var prev = document.getElementById('cal-prev');
-  var next = document.getElementById('cal-next');
   var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   var DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   var FAIR = EVENT.start.slice(0, 10);
+  var DAY = 86400000;
 
   var items = WORKSHOPS.slice().sort(function (a, b) { return a.date.localeCompare(b.date); });
   var byDate = {};
   items.forEach(function (w, i) { w.id = 'ws-' + i; (byDate[w.date] = byDate[w.date] || []).push(w); });
 
-  function parts(iso) { var p = iso.split('-'); return { y: +p[0], m: +p[1] - 1, d: +p[2] }; }
-  function iso(y, m, d) { return y + '-' + (m < 9 ? '0' : '') + (m + 1) + '-' + (d < 10 ? '0' : '') + d; }
+  function toDate(isoDate) { var p = isoDate.split('-'); return new Date(Date.UTC(+p[0], +p[1] - 1, +p[2])); }
+  function iso(dt) { return dt.toISOString().slice(0, 10); }
   function nice(isoDate) {
-    var p = parts(isoDate);
-    return new Date(p.y, p.m, p.d).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
+    return toDate(isoDate).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC' });
   }
+  function monday(dt) { return new Date(dt - ((dt.getUTCDay() + 6) % 7) * DAY); }
 
-  var first = parts(items.length ? items[0].date : FAIR);
-  var last = parts(FAIR);
-  var view = { y: first.y, m: first.m };
+  // One continuous grid: from the week of the first workshop to the week of the fair.
+  function draw() {
+    var from = monday(toDate(items.length ? items[0].date : FAIR));
+    var to = new Date(monday(toDate(FAIR)).getTime() + 6 * DAY);
+    var m1 = from.getUTCMonth(), m2 = to.getUTCMonth();
+    title.textContent = MONTHS[m1] + (m1 !== m2 ? ' – ' + MONTHS[m2] : '') + ' ' + to.getUTCFullYear();
 
-  function drawMonth() {
-    title.textContent = MONTHS[view.m] + ' ' + view.y;
-    var startDay = (new Date(view.y, view.m, 1).getDay() + 6) % 7;
-    var daysIn = new Date(view.y, view.m + 1, 0).getDate();
     var html = DAYS.map(function (d) { return '<span class="cal-dow" aria-hidden="true">' + d + '</span>'; }).join('');
-    for (var i = 0; i < startDay; i++) html += '<span class="cal-day cal-pad" aria-hidden="true"></span>';
-    for (var d = 1; d <= daysIn; d++) {
-      var key = iso(view.y, view.m, d);
+    for (var dt = from; dt <= to; dt = new Date(dt.getTime() + DAY)) {
+      var key = iso(dt);
+      var d = dt.getUTCDate();
+      var label = d === 1 ? '<small>' + MONTHS[dt.getUTCMonth()].slice(0, 3) + '</small>' + d : d;
       var ws = byDate[key];
+      var cls = 'cal-day' + (d === 1 ? ' cal-month-start' : '');
       if (ws) {
-        html += '<button type="button" class="cal-day cal-ws" data-target="' + ws[0].id + '" aria-label="' + esc(nice(key) + ': ' + ws.map(function (w) { return w.title; }).join(', ')) + '">' + d + '</button>';
+        html += '<button type="button" class="' + cls + ' cal-ws" data-target="' + ws[0].id + '" aria-label="' + esc(nice(key) + ': ' + ws.map(function (w) { return w.title; }).join(', ')) + '">' + label + '</button>';
       } else if (key === FAIR) {
-        html += '<a class="cal-day cal-fair" href="#top" aria-label="' + esc(nice(key)) + ': PhireD career fair">' + d + '</a>';
+        html += '<button type="button" class="' + cls + ' cal-fair" data-target="ws-fair" aria-label="' + esc(nice(key)) + ': PhireD career fair">' + label + '</button>';
       } else {
-        html += '<span class="cal-day">' + d + '</span>';
+        html += '<span class="' + cls + '">' + label + '</span>';
       }
     }
     grid.innerHTML = html;
-    var vKey = view.y * 12 + view.m;
-    prev.disabled = vKey <= first.y * 12 + first.m;
-    next.disabled = vKey >= last.y * 12 + last.m;
   }
+
+  var fairItem = '<li class="ws ws-fair" id="ws-fair" tabindex="-1"><p class="ws-when"><time datetime="' + FAIR + '">' + esc(nice(FAIR)) + '</time> · 13:00–15:00 · Nymble, KTH Campus</p>' +
+    '<div class="ws-head"><h3>PhireD career fair</h3><a class="ws-btn ws-btn-fair" href="#register-now">Register</a></div>' +
+    '<p>The main event: meet the exhibitors.</p></li>';
 
   list.innerHTML = items.map(function (w) {
     var btn = w.signup
-      ? '<a class="btn btn-small" href="' + esc(w.signup) + '" target="_blank" rel="noopener">Sign up<span class="visually-hidden"> for ' + esc(w.title) + ' (opens in a new tab)</span></a>'
-      : '<span class="ws-soon">Sign-up opens soon</span>';
+      ? '<a class="ws-btn" href="' + esc(w.signup) + '" target="_blank" rel="noopener">Sign up<span class="visually-hidden"> for ' + esc(w.title) + ' (opens in a new tab)</span></a>'
+      : '<span class="ws-btn ws-soon">Sign-up soon</span>';
     return '<li class="ws" id="' + w.id + '" tabindex="-1">' +
       '<p class="ws-when"><time datetime="' + w.date + '">' + esc(nice(w.date)) + '</time>' + (w.time ? ' · ' + esc(w.time) : '') + (w.place ? ' · ' + esc(w.place) : '') + '</p>' +
-      '<h3>' + esc(w.title) + '</h3>' +
-      '<p>' + esc(w.text) + '</p>' + btn + '</li>';
-  }).join('');
+      '<div class="ws-head"><h3>' + esc(w.title) + '</h3>' + btn + '</div>' +
+      '<p>' + esc(w.text) + '</p></li>';
+  }).join('') + fairItem;
 
   grid.addEventListener('click', function (e) {
-    var b = e.target.closest('.cal-ws');
+    var b = e.target.closest('[data-target]');
     if (!b) return;
     var el = document.getElementById(b.getAttribute('data-target'));
     list.querySelectorAll('.ws-active').forEach(function (x) { x.classList.remove('ws-active'); });
@@ -437,7 +454,5 @@ function slug(s) {
     el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     el.focus({ preventScroll: true });
   });
-  prev.addEventListener('click', function () { view.m--; if (view.m < 0) { view.m = 11; view.y--; } drawMonth(); });
-  next.addEventListener('click', function () { view.m++; if (view.m > 11) { view.m = 0; view.y++; } drawMonth(); });
-  drawMonth();
+  draw();
 })();
