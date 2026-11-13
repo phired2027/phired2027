@@ -8,7 +8,7 @@
   <link rel="icon" href="images/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
   <link rel="preload" href="fonts/bricolage-grotesque.woff" as="font" type="font/woff" crossorigin>
-  <link rel="stylesheet" href="style/style.css?v=20261113-4">
+  <link rel="stylesheet" href="style/style.css?v=20261113-9">
 </head>
 <body>
 
@@ -61,35 +61,54 @@
   </main>
 
   <footer class="site-footer">
-    <div class="wrap footer-grid">
-      <div class="footer-org">
-        <a class="footer-chapter" href="https://www.dr.kth.se/" aria-label="Dr/THS, the PhD Chapter at KTH">
-          <img src="images/phd-chapter-logo.png" alt="" width="70" height="81">
+    <div class="wrap footer-top">
+      <div class="footer-about">
+        <img class="footer-logo" src="images/phired-logo-wide.png" alt="PhireD" width="131" height="36">
+        <p>The career fair for PhD students and postdocs at KTH. Organised by PhDs, for PhDs.</p>
+        <a class="footer-chapter" href="https://www.dr.kth.se/">
+          <img src="images/phd-chapter-logo.png" alt="" width="28" height="32">
+          <span>Dr/THS, the PhD Chapter at KTH</span>
         </a>
-        <div>
-          <p class="footer-brand">Organised by PhDs, for PhDs</p>
-          <p>PhireD KTH is run by volunteers from <a href="https://www.dr.kth.se/">Dr/THS, the PhD Chapter at KTH</a>. 2027 is the third edition.</p>
-        </div>
-      </div>
-      <div>
-        <p class="footer-head">The 2027 committee</p>
-        <!-- To credit someone, add a <li>Name <span>Role</span></li> -->
-        <ul class="footer-team">
-          <li>Kamila Oppelová <span>Project Manager</span></li>
-          <li>Company Relations Team <span>phired-fair@dr.kth.se</span></li>
-        </ul>
       </div>
       <div>
         <p class="footer-head">Contact</p>
-        <p><a href="mailto:phired-fair@dr.kth.se">phired-fair@dr.kth.se</a><br><a href="mailto:business@dr.kth.se">business@dr.kth.se</a><br><a href="privacy.html">Privacy</a></p>
+        <ul class="footer-links">
+          <li><a href="mailto:phired-fair@dr.kth.se">phired-fair@dr.kth.se</a></li>
+          <li><a href="mailto:business@dr.kth.se">business@dr.kth.se</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+        </ul>
       </div>
       <div>
         <p class="footer-head">Follow</p>
-        <p><a href="https://www.linkedin.com/company/phired-kth/">LinkedIn</a><br><a href="https://www.dr.kth.se/">PhD Chapter</a></p>
+        <ul class="footer-links">
+          <li><a href="https://www.linkedin.com/company/phired-kth/">LinkedIn</a></li>
+          <li><a href="https://www.dr.kth.se/">PhD Chapter</a></li>
+        </ul>
       </div>
     </div>
-    <div class="wrap footer-bottom">
-      <p>PhireD KTH 2027 · Tuesday 2 February 2027, 13:00–15:00 · Nymble, KTH Campus, Stockholm</p>
+
+    <div class="wrap">
+      <div class="footer-crew">
+      <p class="footer-head">Organising committee 2027</p>
+      <p class="footer-crew-intro">The volunteers who make PhireD happen.</p>
+      <!-- The order is shuffled on every page load (js/site.js). To add roles later, give everyone one:
+           <li><span class="avatar-sm">AB</span>Name <small>Role</small></li> -->
+      <ul class="footer-team" id="footer-team">
+          <li><span class="avatar-sm" aria-hidden="true">EC</span>Enzo Cording</li>
+          <li><span class="avatar-sm" aria-hidden="true">BD</span>Bota Duisenbay</li>
+          <li><span class="avatar-sm" aria-hidden="true">GG</span>Gourav Ghosh</li>
+          <li><span class="avatar-sm" aria-hidden="true">HK</span>Hilma Karlsson</li>
+          <li><span class="avatar-sm" aria-hidden="true">KO</span>Kamila Oppelová</li>
+          <li><span class="avatar-sm" aria-hidden="true">LP</span>Lucia Piron</li>
+          <li><span class="avatar-sm" aria-hidden="true">RS</span>Rika Safrina</li>
+          <li><span class="avatar-sm" aria-hidden="true">GT</span>Graeme Trundle</li>
+          <li><span class="avatar-sm" aria-hidden="true">HV</span>Hemanth Venkatesan</li>
+      </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p><b>PhireD KTH 2027</b> <span>Tuesday 2 February 2027, 13:00–15:00</span> <span>Nymble, KTH Campus, Stockholm</span></p>
     </div>
   </footer>
 </body>

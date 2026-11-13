@@ -20,7 +20,7 @@ Event website, served at https://phired.se via GitHub Pages.
 - **Event date / countdown:** top of `js/site.js` (`EVENT.start`, `EVENT.end`). The date, time and venue in the hero, FAQ and footer are plain text in the HTML files.
 - **Registration:** paste the KTH registration form link into `REGISTRATION_URL` at the top of `js/site.js`. Until then the Register buttons say "Registration opens soon".
 - **Workshops calendar:** the `WORKSHOPS` list at the top of `js/site.js`. Each has a date, time, place, title, text and a `signup` link. The dates there now are placeholders.
-- **Organising committee:** the "PhireD 2027 committee" section near the end of `index.html`. Copy one `<li>` per person.
+- **Organising committee:** the "PhireD 2027 committee" list in the footer. The footer is repeated in all four HTML files, so edit it in each.
 - **Photos:** `images/2026/`. Landscape, about 1600px wide, under 400 KB each. `images/og.jpg` (1200x630) is the link preview image.
 - **Exhibitors:** `data/companies.js` has one list per year. `PHIRED_EXHIBITORS[2027]` fills the 2027 tab (empty shows "coming soon"); `PHIRED_EXHIBITORS[2026]` fills the 2026 tab and the front-page wall.
 
@@ -32,7 +32,7 @@ Search the files for `TODO` to find placeholders that still need real content.
 
 1. Open `data/companies.js` and copy one `{ ... }` block into the right year's list (including the comma between blocks).
 2. Fill in the fields; leave any text as `""` to hide it. Use `sponsor: "Silver sponsor"` etc. for sponsors.
-3. Optional logo: put it in `images/logos/` and set `logo: "images/logos/name.svg"`. Without it, initials are shown.
+3. Optional logo: put it in `images/logos/` and set `logo: "images/logos/name.svg"`. Without it, the name is shown. SVG or a wide PNG on a transparent background works best. The current logos are from Wikimedia Commons.
 
 ## Connecting the reminder sign-up to a Google Form
 

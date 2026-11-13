@@ -20,37 +20,38 @@ var REGISTRATION_URL = "";
    WORKSHOPS (calendar on the front page)
    - date:   "YYYY-MM-DD"
    - time:   free text, e.g. "17:00–18:30"
+   - place:  room or address; leave "" until it's known
    - signup: link to the sign-up form for that workshop. Leave "" to
              show "Sign-up opens soon".
    TODO: the dates below are placeholders. Replace them with the real ones.
 ------------------------------------------------------------------- */
 var WORKSHOPS = [
   {
-    date: "2027-01-13", time: "17:00–18:30", place: "KTH Campus",
+    date: "2027-01-13", time: "17:00–18:30", place: "",
     title: "CV workshop",
     text: "Turn your thesis and publications into a CV that industry recruiters understand.",
     signup: ""
   },
   {
-    date: "2027-01-18", time: "17:00–18:30", place: "KTH Campus",
+    date: "2027-01-18", time: "17:00–18:30", place: "",
     title: "Job seeking in Sweden for international researchers",
     text: "How the Swedish job market works, where jobs are posted, and what to know about permits and language.",
     signup: ""
   },
   {
-    date: "2027-01-21", time: "17:00–18:30", place: "KTH Campus",
+    date: "2027-01-21", time: "17:00–18:30", place: "",
     title: "Panel: academia, industry or a new direction?",
     text: "PhDs who stayed in academia, moved to industry or changed field entirely share how they decided.",
     signup: ""
   },
   {
-    date: "2027-01-25", time: "17:00–18:30", place: "KTH Campus",
+    date: "2027-01-25", time: "17:00–18:30", place: "",
     title: "Pitch your research",
     text: "Practise explaining your research in one minute, so it lands with someone from outside your field.",
     signup: ""
   },
   {
-    date: "2027-01-28", time: "17:00–18:30", place: "KTH Campus",
+    date: "2027-01-28", time: "17:00–18:30", place: "",
     title: "Networking with confidence",
     text: "The psychology of networking: starting conversations, handling nerves and following up afterwards.",
     signup: ""
@@ -406,7 +407,8 @@ function slug(s) {
   }
   function monday(dt) { return new Date(dt - ((dt.getUTCDay() + 6) % 7) * DAY); }
 
-  // One continuous grid: from the week of the first workshop to the week of the fair.
+  // From the week of the first workshop to the week of the fair. Each month gets its own
+  // heading row, and its days start in the right weekday column, so every month looks the same.
   function draw() {
     var from = monday(toDate(items.length ? items[0].date : FAIR));
     var to = new Date(monday(toDate(FAIR)).getTime() + 6 * DAY);
@@ -414,18 +416,25 @@ function slug(s) {
     title.textContent = MONTHS[m1] + (m1 !== m2 ? ' – ' + MONTHS[m2] : '') + ' ' + to.getUTCFullYear();
 
     var html = DAYS.map(function (d) { return '<span class="cal-dow" aria-hidden="true">' + d + '</span>'; }).join('');
+    var month = -1;
     for (var dt = from; dt <= to; dt = new Date(dt.getTime() + DAY)) {
       var key = iso(dt);
       var d = dt.getUTCDate();
-      var label = d === 1 ? '<small>' + MONTHS[dt.getUTCMonth()].slice(0, 3) + '</small>' + d : d;
+      var col = (dt.getUTCDay() + 6) % 7;
+      if (dt.getUTCMonth() !== month) {
+        // close the previous month's last row, then start the new month on its own row
+        if (month !== -1 && col > 0) for (var p = col; p < 7; p++) html += '<span class="cal-day cal-pad" aria-hidden="true"></span>';
+        month = dt.getUTCMonth();
+        html += '<span class="cal-month">' + MONTHS[month] + '</span>';
+        for (var q = 0; q < col; q++) html += '<span class="cal-day cal-pad" aria-hidden="true"></span>';
+      }
       var ws = byDate[key];
-      var cls = 'cal-day' + (d === 1 ? ' cal-month-start' : '');
       if (ws) {
-        html += '<button type="button" class="' + cls + ' cal-ws" data-target="' + ws[0].id + '" aria-label="' + esc(nice(key) + ': ' + ws.map(function (w) { return w.title; }).join(', ')) + '">' + label + '</button>';
+        html += '<button type="button" class="cal-day cal-ws" data-target="' + ws[0].id + '" aria-label="' + esc(nice(key) + ': ' + ws.map(function (w) { return w.title; }).join(', ')) + '">' + d + '</button>';
       } else if (key === FAIR) {
-        html += '<button type="button" class="' + cls + ' cal-fair" data-target="ws-fair" aria-label="' + esc(nice(key)) + ': PhireD career fair">' + label + '</button>';
+        html += '<button type="button" class="cal-day cal-fair" data-target="ws-fair" aria-label="' + esc(nice(key)) + ': PhireD career fair">' + d + '</button>';
       } else {
-        html += '<span class="' + cls + '">' + label + '</span>';
+        html += '<span class="cal-day">' + d + '</span>';
       }
     }
     grid.innerHTML = html;
@@ -455,4 +464,19 @@ function slug(s) {
     el.focus({ preventScroll: true });
   });
   draw();
+})();
+
+/* ------------------------------------------------------------------
+   COMMITTEE (footer): shuffle the order on every page load,
+   so nobody is always first or last.
+------------------------------------------------------------------- */
+(function shuffleTeam() {
+  var ul = document.getElementById('footer-team');
+  if (!ul) return;
+  var items = Array.prototype.slice.call(ul.children);
+  for (var i = items.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = items[i]; items[i] = items[j]; items[j] = t;
+  }
+  items.forEach(function (li) { ul.appendChild(li); });
 })();
