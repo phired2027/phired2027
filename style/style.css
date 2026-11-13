@@ -1080,3 +1080,83 @@ a.ws-btn-fair:hover { background: #f99a52; }
 .b-node.n-logo.is-on .b-dot, .b-node.n-logo:focus-visible .b-dot { r: 38; }
 .b-node.n-logo.is-on .b-glow, .b-node.n-logo:focus-visible .b-glow { r: 50; }
 .n-logo image { pointer-events: none; }
+
+/* "Click me" hint on exhibitor logo cards (front page) */
+.wall-section .section-head { margin-bottom: 8px; }
+.wall li > button { position: relative; overflow: hidden; }
+.wall li > button::after {
+  content: "Click me"; position: absolute; left: 50%; bottom: 8px; transform: translate(-50%, 6px);
+  font: 600 0.72rem/1 var(--body); letter-spacing: 0.02em; white-space: nowrap;
+  padding: 0.4em 0.8em; border-radius: 999px; background: var(--signal); color: var(--white);
+  opacity: 0; pointer-events: none; transition: opacity 0.18s ease, transform 0.18s ease;
+}
+.wall li > button:hover::after, .wall li > button:focus-visible::after { opacity: 1; transform: translate(-50%, 0); }
+.wall .ticker-track li > button img, .wall .ticker-track li > button .wm { transition: transform 0.18s ease; }
+.wall .ticker-track li > button:hover img, .wall .ticker-track li > button:focus-visible img,
+.wall .ticker-track li > button:hover .wm, .wall .ticker-track li > button:focus-visible .wm { transform: translateY(-9px); }
+/* sponsor cards: the pill sits top-right so it doesn't cover the sponsor badge */
+.wall .wall-sponsors li > button::after { left: auto; right: 12px; bottom: auto; top: 12px; transform: translateY(-6px); background: var(--ink); }
+.wall .wall-sponsors li > button:hover::after, .wall .wall-sponsors li > button:focus-visible::after { transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .wall li > button::after { transition: none; }
+}
+
+/* Bridge heading: centred over the (symmetric) bridge, short lines */
+.bridge-head { text-align: center; max-width: 820px; margin: 0 auto; }
+.bridge-head .bridge-kicker { margin: 0 0 14px; font: 700 0.8rem var(--body); letter-spacing: 0.16em; text-transform: uppercase; color: var(--signal); }
+.bridge-head .bridge-lead { margin: 0 auto; max-width: 30ch; font: 800 clamp(1.7rem, 3.2vw, 2.6rem)/1.15 var(--display); letter-spacing: -0.015em; color: var(--ink); text-wrap: balance; }
+.bridge-head .bridge-sub { margin: 14px auto 0; max-width: 46ch; font-size: clamp(1.02rem, 1.3vw, 1.15rem); line-height: 1.5; color: var(--ink-soft); text-wrap: balance; }
+.bridge-fig { margin-top: clamp(4px, 1.5vw, 16px); }
+
+/* Bridge cards: benefit headline, readable body */
+.b-card { gap: 10px; padding: 28px 28px 24px; }
+.b-card .b-card-kicker { font-size: 0.78rem; letter-spacing: 0.12em; }
+.b-card h3 { font-size: clamp(1.4rem, 2vw, 1.65rem); line-height: 1.15; letter-spacing: -0.01em; text-wrap: balance; }
+.b-card p { font-size: 1.05rem; line-height: 1.5; }
+.b-card ul { font-size: 1rem; line-height: 1.45; margin-bottom: 18px; }
+.b-card li { margin-bottom: 0.45em; }
+.b-card a { font-size: 1rem; padding: 0.6em 1.15em; }
+.c-green .b-card-kicker { color: #ffe0c8; opacity: 1; }
+.c-peach .b-card-kicker { color: #6b3a14; opacity: 1; }
+
+/* Card buttons rotate through the three colours: green->navy, peach->green, navy->peach */
+.c-green a { background: #07143d; color: #fff; }
+.c-green a:hover { background: #1b2a5c; }
+.c-peach a { background: #4b7358; color: #fff; }
+.c-peach a:hover { background: #375a43; }
+.c-navy a  { background: #fead6f; color: #07143d; }
+.c-navy a:hover { background: #ffc395; }
+/* Bridge headline: two deliberate lines */
+.bridge-head .bridge-lead { max-width: none; text-wrap: wrap; }
+.bridge-head .bridge-lead > span { display: block; margin: 0; font: inherit; color: inherit; max-width: none; }
+.bridge-head { max-width: 1100px; }
+@media (min-width: 900px) { .bridge-head .bridge-lead > span { white-space: nowrap; } }
+@media (min-width: 900px) { .bridge-head .bridge-sub { max-width: none; white-space: nowrap; } }
+.hero-light h1 { max-width: 15ch; }
+.hero-light h1 { max-width: 16ch; font-size: clamp(2.4rem, 4.8vw, 4.6rem); }
+
+/* ===== Exhibitors page: single pointer for companies ===== */
+.co-cta { padding: 0 0 var(--section); }
+.co-cta-inner {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px 32px; flex-wrap: wrap;
+  padding: 22px 28px; background: var(--ink); color: #c9cbe0; border-radius: 22px;
+}
+.co-cta-inner p { margin: 0; font-size: 1.08rem; }
+.co-cta-inner b { color: var(--white); }
+.co-cta .btn-bright:hover { background: var(--white); }
+
+/* ===== For companies page: matching cards ===== */
+.packages-section .table-scroll { border-radius: 22px; }
+.price-list { margin: 0; background: var(--white); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; }
+.price-list > div { display: grid; grid-template-columns: 1fr auto; gap: 16px; padding: 14px 20px; border-bottom: 1px solid var(--line); }
+.price-list > div:last-child { border-bottom: 0; }
+.price-list dt { font-weight: 500; color: var(--ink); }
+.price-list dd { margin: 0; font-weight: 700; color: var(--ink); white-space: nowrap; }
+.profile-section { border-top: 0; padding-top: 0; }
+.profile-inner { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(24px, 5vw, 64px); align-items: start; }
+.profile-inner > div > p { color: var(--ink-soft); max-width: 46ch; }
+.profile-list > div { grid-template-columns: 120px 1fr; }
+.profile-list dt { font-weight: 700; }
+.profile-list dd { font-weight: 400; color: var(--ink-soft); white-space: normal; }
+@media (max-width: 900px) { .profile-inner { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .profile-list > div { grid-template-columns: 1fr; gap: 2px; } }
