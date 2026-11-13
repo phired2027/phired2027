@@ -1160,3 +1160,7 @@ a.ws-btn-fair:hover { background: #f99a52; }
 .profile-list dd { font-weight: 400; color: var(--ink-soft); white-space: normal; }
 @media (max-width: 900px) { .profile-inner { grid-template-columns: 1fr; } }
 @media (max-width: 520px) { .profile-list > div { grid-template-columns: 1fr; gap: 2px; } }
+
+/* Organising committee: now its own band at the end of the front page (same look as before) */
+.team-band { background: var(--white); padding: 48px 0 52px; border-top: 1px solid var(--line); }
+.team-band .footer-crew { margin: 0; padding: 0; border: 0; }
