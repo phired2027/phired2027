@@ -1,17 +1,24 @@
 /*
-  Exhibitors shown on companies.html and in the "Meet the exhibitors" wall on the front page.
+  Exhibitors, by year.
   -------------------------------------------------------------------------------------
+  - PHIRED_EXHIBITORS[2027]: the 2027 tab on companies.html. Add companies here as they confirm.
+  - PHIRED_EXHIBITORS[2026]: the 2026 tab, and the "2026 exhibitors" wall on the front page.
+
   To add an exhibitor, copy one { ... } block (keep the comma between blocks).
   - sponsor: "Silver sponsor", "Bronze sponsor" ... or "" for none. Sponsors are listed first.
   - type:    short label such as Company, Start-up, Research institute, Funder, Public agency.
   - areas:   tags used for the filter buttons. Reuse existing spellings so filters stay short.
   - logo:    optional, e.g. "images/logos/abb.svg". Without it, initials are shown.
   - Any text field can be left "" and is then hidden.
-  Based on the latest confirmed line-up; update as exhibitors confirm or cancel.
 */
-window.EXHIBITOR_YEAR = 2027;
+window.PHIRED_EXHIBITORS = {};
 
-window.PHIRED_COMPANIES = [
+/* 2027: empty until the first exhibitors confirm. The tab then shows a short "coming soon" note. */
+window.PHIRED_EXHIBITORS[2027] = [
+];
+
+/* 2026 line-up */
+window.PHIRED_EXHIBITORS[2026] = [
   {
     name: "FOI",
     sponsor: "Silver sponsor",
@@ -21,7 +28,7 @@ window.PHIRED_COMPANIES = [
     about: "Research from basic natural science to technology: physics, electronics, chemistry and materials, plus marine technology, cybersecurity, AI, signal processing and space. Also defence economics and security policy.",
     meet: "",
     lookingFor: "FOI is growing and hiring PhDs in several fields, with paths to deepen your research, broaden it or move into project management.",
-    links: { website: "https://www.foi.se/en", linkedin: "https://www.linkedin.com/company/foi/" }
+    links: { website: "https://www.foi.se/en/foi.html", linkedin: "https://www.linkedin.com/company/foi/" }
   },
   {
     name: "Westinghouse",
@@ -119,7 +126,7 @@ window.PHIRED_COMPANIES = [
     name: "KTH Career",
     type: "KTH",
     areas: ["Careers and mobility"],
-    oneLiner: "Career support at KTH. Runs the CV feedback booth at PhireD.",
+    oneLiner: "Career support for KTH students and researchers.",
     links: { website: "https://www.kth.se/en" }
   },
   {

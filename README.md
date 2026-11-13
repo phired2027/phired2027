@@ -5,34 +5,38 @@ Event website, served at https://phired.se via GitHub Pages.
 | File | What it is |
 |---|---|
 | `index.html` | Front page |
-| `companies.html` | Company directory (reads `data/companies.js`) |
+| `companies.html` | Exhibitors page with 2027 / 2026 tabs (reads `data/companies.js`) |
+| `exhibit.html` | For companies: packages, add-ons and contact (from the 2027 catalog) |
 | `privacy.html` | How sign-up emails are used. Fill in the `[bracketed]` parts before sign-up opens |
 | `data/companies.js` | Exhibitor profiles. Copy a block to add one |
-| `js/site.js` | Sign-up form and directory code. The sign-up settings are at the top |
+| `js/site.js` | Event time, registration link, workshops and sign-up settings at the top; page code below |
 | `style/style.css` | Styles |
 | `fonts/` | Self-hosted fonts (Bricolage Grotesque, Instrument Sans; SIL Open Font License) |
-| `images/` | Favicon, logos (put company logos in `images/companies/`) |
+| `images/` | Favicon, PhireD and PhD Chapter logos, 2026 photos |
 | `CNAME` | Custom domain for GitHub Pages. Keep this file |
 
 ## Quick edits
 
-- **Event date / countdown:** top of `js/site.js` (`EVENT.start`). Set `timeConfirmed: true` when the 2027 opening time is official.
+- **Event date / countdown:** top of `js/site.js` (`EVENT.start`, `EVENT.end`). The date, time and venue in the hero, FAQ and footer are plain text in the HTML files.
+- **Registration:** paste the KTH registration form link into `REGISTRATION_URL` at the top of `js/site.js`. Until then the Register buttons say "Registration opens soon".
+- **Workshops calendar:** the `WORKSHOPS` list at the top of `js/site.js`. Each has a date, time, place, title, text and a `signup` link. The dates there now are placeholders.
+- **Organising committee:** the "PhireD 2027 committee" section near the end of `index.html`. Copy one `<li>` per person.
 - **Photos:** `images/2026/`. Landscape, about 1600px wide, under 400 KB each. `images/og.jpg` (1200x630) is the link preview image.
-- **Exhibitors:** `data/companies.js` feeds both the exhibitors page and the "Who came in 2026" wall. When the 2027 line-up is confirmed, update the list and the headings that say 2026.
+- **Exhibitors:** `data/companies.js` has one list per year. `PHIRED_EXHIBITORS[2027]` fills the 2027 tab (empty shows "coming soon"); `PHIRED_EXHIBITORS[2026]` fills the 2026 tab and the front-page wall.
 
-- **After changing CSS or JS:** bump the `?v=...` number on the `style.css`, `site.js` and `companies.js` links in the three HTML files, so browsers fetch the new version instead of an old cached one.
+- **After changing CSS or JS:** bump the `?v=...` number on the `style.css`, `site.js` and `companies.js` links in the HTML files, so browsers fetch the new version instead of an old cached one.
 
 Search the files for `TODO` to find placeholders that still need real content.
 
 ## Adding an exhibitor
 
-1. Open `data/companies.js` and copy one `{ ... }` block (including the comma between blocks).
+1. Open `data/companies.js` and copy one `{ ... }` block into the right year's list (including the comma between blocks).
 2. Fill in the fields; leave any text as `""` to hide it. Use `sponsor: "Silver sponsor"` etc. for sponsors.
 3. Optional logo: put it in `images/logos/` and set `logo: "images/logos/name.svg"`. Without it, initials are shown.
 
-## Connecting the email sign-up to a Google Form
+## Connecting the reminder sign-up to a Google Form
 
-The form on the front page sends emails into a Google Form, and the answers land in a Google Sheet you can use for reminders and the feedback-form email.
+People who register through the KTH form are already on your reminder list: export the emails from the KTH form's responses. The small "Get a reminder" form on the front page is for people who aren't ready to register yet. It sends emails into a Google Form, and the answers land in a Google Sheet you can use for reminders and the feedback-form email.
 
 1. Create a Google Form with two **Short answer** questions: `Email` and `Role`.
    (Turn off "Collect email addresses" in the form settings; the site sends the email as an ordinary answer.)
