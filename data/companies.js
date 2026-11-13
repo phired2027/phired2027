@@ -8,7 +8,7 @@
   - sponsor: "Silver sponsor", "Bronze sponsor" ... or "" for none. Sponsors are listed first.
   - type:    short label such as Company, Start-up, Research institute, Funder, Public agency.
   - areas:   tags used for the filter buttons. Reuse existing spellings so filters stay short.
-  - logo:    optional, e.g. "images/logos/abb.svg". Without it, the name (or initials) is shown.
+  - logo:    optional, e.g. "images/exhibitors/abb.svg". Without it, the name (or initials) is shown.
   - short:   optional shorter name for the front-page logo ticker.
   - Any text field can be left "" and is then hidden.
 */
@@ -22,7 +22,7 @@ window.PHIRED_EXHIBITORS[2027] = [
 window.PHIRED_EXHIBITORS[2026] = [
   {
     name: "FOI",
-    logo: "images/logos/foi.png",
+    logo: "images/exhibitors/foi.png",
     sponsor: "Silver sponsor",
     type: "Government research agency",
     areas: ["Defence and security", "AI and data", "Physics and electronics"],
@@ -34,7 +34,7 @@ window.PHIRED_EXHIBITORS[2026] = [
   },
   {
     name: "Westinghouse",
-    logo: "images/logos/westinghouse.svg",
+    logo: "images/exhibitors/westinghouse.svg",
     sponsor: "Silver sponsor",
     type: "Company",
     areas: ["Energy and nuclear"],
@@ -46,7 +46,7 @@ window.PHIRED_EXHIBITORS[2026] = [
   },
   {
     name: "Siemens Energy",
-    logo: "images/logos/siemens-energy.svg",
+    logo: "images/exhibitors/siemens-energy.svg",
     sponsor: "Bronze sponsor",
     type: "Company",
     areas: ["Energy and nuclear", "Industry and manufacturing"],
@@ -58,7 +58,7 @@ window.PHIRED_EXHIBITORS[2026] = [
   },
   {
     name: "ABB",
-    logo: "images/logos/abb.svg",
+    logo: "images/exhibitors/abb.svg",
     type: "Company",
     areas: ["Energy and nuclear", "Industry and manufacturing"],
     oneLiner: "Electrification and automation technology.",
@@ -66,7 +66,7 @@ window.PHIRED_EXHIBITORS[2026] = [
   },
   {
     name: "Alstom",
-    logo: "images/logos/alstom.svg",
+    logo: "images/exhibitors/alstom.svg",
     type: "Company",
     areas: ["Industry and manufacturing"],
     oneLiner: "Rail transport: trains, signalling and services.",
@@ -74,7 +74,7 @@ window.PHIRED_EXHIBITORS[2026] = [
   },
   {
     name: "Blykalla",
-    logo: "images/logos/blykalla.png",
+    logo: "images/exhibitors/blykalla.png",
     type: "Start-up",
     areas: ["Energy and nuclear", "Materials and metals"],
     oneLiner: "Developing SEALER, a compact lead-cooled nuclear reactor, from KTH research.",
@@ -83,7 +83,7 @@ window.PHIRED_EXHIBITORS[2026] = [
   },
   {
     name: "BrainZell",
-    logo: "images/logos/brainzell.png",
+    logo: "images/exhibitors/brainzell.png",
     type: "Start-up",
     areas: ["Life science", "AI and data"],
     oneLiner: "Human brain models from patient-derived stem cells, for drug discovery.",
@@ -92,7 +92,7 @@ window.PHIRED_EXHIBITORS[2026] = [
   },
   {
     name: "COMSOL",
-    logo: "images/logos/comsol.svg",
+    logo: "images/exhibitors/comsol.svg",
     type: "Company",
     areas: ["Simulation and software"],
     oneLiner: "Multiphysics modelling and simulation software, founded in 1986 by two KTH students.",
@@ -101,7 +101,7 @@ window.PHIRED_EXHIBITORS[2026] = [
   },
   {
     name: "Electrolux Group",
-    logo: "images/logos/electrolux.svg",
+    logo: "images/exhibitors/electrolux.svg",
     type: "Company",
     areas: ["Industry and manufacturing"],
     oneLiner: "Home appliances sold in about 120 markets under Electrolux, AEG and Frigidaire.",
@@ -110,7 +110,7 @@ window.PHIRED_EXHIBITORS[2026] = [
   },
   {
     name: "Ericsson",
-    logo: "images/logos/ericsson.svg",
+    logo: "images/exhibitors/ericsson.svg",
     type: "Company",
     areas: ["Telecom and networks"],
     oneLiner: "Communications technology and mobile networks.",
@@ -119,7 +119,7 @@ window.PHIRED_EXHIBITORS[2026] = [
   },
   {
     name: "EURES Sweden, Arbetsförmedlingen",
-    logo: "images/logos/eures.png",
+    logo: "images/exhibitors/eures.png",
     short: "EURES Sweden",
     type: "Public agency",
     areas: ["Careers and mobility"],
@@ -129,7 +129,7 @@ window.PHIRED_EXHIBITORS[2026] = [
   },
   {
     name: "Huawei Sweden R&D",
-    logo: "images/logos/huawei.png",
+    logo: "images/exhibitors/huawei.png",
     short: "Huawei R&D",
     type: "Company",
     areas: ["Telecom and networks"],
@@ -139,7 +139,7 @@ window.PHIRED_EXHIBITORS[2026] = [
   },
   {
     name: "KTH Career",
-    logo: "images/logos/kth.png",
+    logo: "images/exhibitors/kth.png",
     type: "KTH",
     areas: ["Careers and mobility"],
     oneLiner: "Career support for KTH students and researchers.",
@@ -147,7 +147,7 @@ window.PHIRED_EXHIBITORS[2026] = [
   },
   {
     name: "KTH Innovation",
-    logo: "images/logos/kth-innovation.png",
+    logo: "images/exhibitors/kth-innovation.png",
     type: "KTH",
     areas: ["Innovation and start-ups", "Funding and grants"],
     oneLiner: "Helps researchers turn their research into start-ups, industry collaboration or societal impact.",
@@ -156,7 +156,7 @@ window.PHIRED_EXHIBITORS[2026] = [
   },
   {
     name: "KTH Relocation and EURAXESS",
-    logo: "images/logos/euraxess.png",
+    logo: "images/exhibitors/euraxess.png",
     short: "KTH Relocation",
     type: "KTH",
     areas: ["Careers and mobility"],
@@ -166,7 +166,7 @@ window.PHIRED_EXHIBITORS[2026] = [
   },
   {
     name: "NKT",
-    logo: "images/logos/nkt.svg",
+    logo: "images/exhibitors/nkt.svg",
     type: "Company",
     areas: ["Energy and nuclear", "Industry and manufacturing"],
     oneLiner: "Low-, medium- and high-voltage power cables for the energy transition.",
@@ -175,7 +175,7 @@ window.PHIRED_EXHIBITORS[2026] = [
   },
   {
     name: "RISE",
-    logo: "images/logos/rise.svg",
+    logo: "images/exhibitors/rise.svg",
     type: "Research institute",
     areas: ["Applied research"],
     oneLiner: "Research Institutes of Sweden: applied research with industry and the public sector.",
@@ -183,7 +183,7 @@ window.PHIRED_EXHIBITORS[2026] = [
   },
   {
     name: "SEI",
-    logo: "images/logos/sei.png",
+    logo: "images/exhibitors/sei.png",
     type: "Research institute",
     areas: ["Climate and environment"],
     oneLiner: "Stockholm Environment Institute: international non-profit research on climate, environment and sustainable development.",
@@ -192,7 +192,7 @@ window.PHIRED_EXHIBITORS[2026] = [
   },
   {
     name: "SMHI",
-    logo: "images/logos/smhi.svg",
+    logo: "images/exhibitors/smhi.svg",
     type: "Public agency",
     areas: ["Climate and environment", "Simulation and software", "AI and data"],
     oneLiner: "Sweden's expert authority on weather, water and climate.",
@@ -202,7 +202,7 @@ window.PHIRED_EXHIBITORS[2026] = [
   },
   {
     name: "SSF",
-    logo: "images/logos/ssf.png",
+    logo: "images/exhibitors/ssf.png",
     type: "Funder",
     areas: ["Funding and grants"],
     oneLiner: "Swedish Foundation for Strategic Research: funding for science, technology and medicine.",
@@ -211,7 +211,7 @@ window.PHIRED_EXHIBITORS[2026] = [
   },
   {
     name: "Stegra",
-    logo: "images/logos/stegra.png",
+    logo: "images/exhibitors/stegra.png",
     type: "Company",
     areas: ["Materials and metals", "Energy and nuclear"],
     oneLiner: "Green steel made with green hydrogen (formerly H2 Green Steel).",
@@ -220,7 +220,7 @@ window.PHIRED_EXHIBITORS[2026] = [
   },
   {
     name: "Studsvik",
-    logo: "images/logos/studsvik.png",
+    logo: "images/exhibitors/studsvik.png",
     type: "Company",
     areas: ["Energy and nuclear", "Materials and metals"],
     oneLiner: "Technical services for the nuclear power industry.",
@@ -229,7 +229,7 @@ window.PHIRED_EXHIBITORS[2026] = [
   },
   {
     name: "Swerim",
-    logo: "images/logos/swerim.png",
+    logo: "images/exhibitors/swerim.png",
     type: "Research institute",
     areas: ["Materials and metals"],
     oneLiner: "Metals research institute, from raw material to finished product.",
@@ -238,7 +238,7 @@ window.PHIRED_EXHIBITORS[2026] = [
   },
   {
     name: "Switch to Sweden",
-    logo: "images/logos/switch-to-sweden.png",
+    logo: "images/exhibitors/switch-to-sweden.png",
     type: "National initiative",
     areas: ["Careers and mobility"],
     oneLiner: "Matches international talent already in Sweden with Swedish companies.",
@@ -247,7 +247,7 @@ window.PHIRED_EXHIBITORS[2026] = [
   },
   {
     name: "Swedish Research Council",
-    logo: "images/logos/swedish-research-council.png",
+    logo: "images/exhibitors/swedish-research-council.png",
     type: "Funder",
     areas: ["Funding and grants"],
     oneLiner: "Vetenskapsrådet: Sweden's largest government funder of research.",
@@ -255,7 +255,7 @@ window.PHIRED_EXHIBITORS[2026] = [
   },
   {
     name: "Vattenfall",
-    logo: "images/logos/vattenfall.svg",
+    logo: "images/exhibitors/vattenfall.svg",
     type: "Company",
     areas: ["Energy and nuclear"],
     oneLiner: "Energy company producing and selling electricity and heat.",
@@ -263,7 +263,7 @@ window.PHIRED_EXHIBITORS[2026] = [
   },
   {
     name: "Venture Cup",
-    logo: "images/logos/venture-cup.png",
+    logo: "images/exhibitors/venture-cup.png",
     type: "Start-up support",
     areas: ["Innovation and start-ups"],
     oneLiner: "Start-up competition and support for turning ideas into companies.",

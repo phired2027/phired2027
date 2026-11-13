@@ -10,15 +10,15 @@
   <meta property="og:description" content="A bridge between academia and industry. 2 February 2027, 13:00–15:00 at Nymble, KTH Campus. Free entry.">
   <meta property="og:url" content="https://phired.se/">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://phired.se/images/og.jpg">
+  <meta property="og:image" content="https://phired.se/images/brand/og.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="icon" href="images/favicon.png" type="image/png">
-  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <link rel="icon" href="images/brand/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="images/brand/apple-touch-icon.png">
   <link rel="preload" href="fonts/bricolage-grotesque.woff" as="font" type="font/woff" crossorigin>
-  <link rel="stylesheet" href="style/style.css?v=20261113-13">
+  <link rel="stylesheet" href="style/style.css?v=20261113-20">
 </head>
 <body id="top">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -26,7 +26,7 @@
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="brand" href="./" aria-label="PhireD KTH 2027 home">
-        <img class="brand-logo" src="images/phired-logo-wide.png" alt="PhireD" width="131" height="36">
+        <img class="brand-logo" src="images/brand/phired-logo-wide.png" alt="PhireD" width="131" height="36">
         <span>KTH 2027</span>
       </a>
       <nav class="nav" aria-label="Main">
@@ -80,32 +80,69 @@
             <a class="btn btn-ghost" href="#workshops">See the workshops</a>
           </div>
         </div>
-        <img class="hero-logo" src="images/phired-logo-stacked.png" alt="PhireD logo: a torch under a laurel wreath, above a bridge" width="320" height="361">
+        <img class="hero-logo" src="images/brand/phired-logo-stacked.png" alt="PhireD logo: a torch under a laurel wreath, above a bridge" width="320" height="361">
       </div>
     </section>
 
-    <!-- WHY -->
-    <section class="section" id="why">
-      <div class="wrap why">
-        <div class="why-copy">
-          <h2>A bridge between academia and industry</h2>
-          <p>PhireD has always had one aim: to connect the people doing doctoral research at KTH with the organisations that need their skills. Run by the PhD Chapter, it brings industry, start-ups, research institutes and funders to campus for one afternoon.</p>
+    <!-- WHY: the bridge -->
+    <section class="section bridge-section" id="why">
+      <div class="wrap">
+        <div class="bridge-head">
+          <h2 class="visually-hidden">A bridge between academia and industry</h2>
+          <p class="bridge-lead">PhireD has always had one aim: to connect the people doing doctoral research at KTH with the organisations that need their skills. <span>Industry, start-ups, research institutes and funders come to campus for one afternoon.</span></p>
         </div>
-        <ul class="bridge">
-          <li>
-            <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 42V18l12 8v-8l12 8V8h12v34z"/><path d="M14 34h4M24 34h4M34 34h4"/></svg>
-            <h3>For companies</h3>
-            <p>Find talent with doctoral degrees, and see the research directions coming out of KTH.</p>
-          </li>
-          <li>
-            <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M4 18 24 8l20 10-20 10z"/><path d="M12 22v10c0 3 6 6 12 6s12-3 12-6V22"/><path d="M44 18v12"/></svg>
+        <figure class="bridge-fig" id="bridge-fig">
+          <svg class="bridge-svg" viewBox="0 0 900 260" role="img" aria-labelledby="bridge-svg-title">
+            <title id="bridge-svg-title">A bridge from academia to industry, with PhDs on one side, companies on the other and collaboration in the middle</title>
+            <defs>
+              <linearGradient id="b-grad" x1="0" x2="1" y1="0" y2="0">
+                <stop offset="0" stop-color="#4b7358"/><stop offset="0.5" stop-color="#fead6f"/><stop offset="1" stop-color="#07143d"/>
+              </linearGradient>
+            </defs>
+            <g class="b-hangers"><line x1="110" y1="168.1" x2="110" y2="215.1"/><line x1="230" y1="122.1" x2="230" y2="209.8"/><line x1="290" y1="106.5" x2="290" y2="208.0"/><line x1="350" y1="95.8" x2="350" y2="206.8"/><line x1="410" y1="90.1" x2="410" y2="206.1"/><line x1="530" y1="93.4" x2="530" y2="206.5"/><line x1="590" y1="102.4" x2="590" y2="207.5"/><line x1="650" y1="116.4" x2="650" y2="209.2"/><line x1="710" y1="135.2" x2="710" y2="211.3"/></g>
+            <path class="b-deck" d="M0 222 Q450 190 900 222" pathLength="1"/>
+            <path class="b-arch" id="b-arch" d="M40 200 Q450 -30 860 200" pathLength="1"/>
+            <line class="b-pillar b-pillar-a" x1="40" y1="70" x2="40" y2="250"/>
+            <line class="b-pillar b-pillar-i" x1="860" y1="70" x2="860" y2="250"/>
+            <text class="b-side" x="58" y="252">ACADEMIA</text>
+            <text class="b-side" x="842" y="252" text-anchor="end">INDUSTRY</text>
+            <g class="b-particles"><circle class="b-particle p-green" r="5"><animateMotion dur="7s" begin="0.0s" repeatCount="indefinite" calcMode="linear" ><mpath href="#b-arch"/></animateMotion></circle><circle class="b-particle p-peach" r="5"><animateMotion dur="7s" begin="-1.1s" repeatCount="indefinite" calcMode="linear" keyPoints="1;0" keyTimes="0;1" ><mpath href="#b-arch"/></animateMotion></circle><circle class="b-particle p-navy" r="5"><animateMotion dur="7s" begin="-2.3s" repeatCount="indefinite" calcMode="linear" keyPoints="1;0" keyTimes="0;1" ><mpath href="#b-arch"/></animateMotion></circle><circle class="b-particle p-green" r="5"><animateMotion dur="7s" begin="-3.4s" repeatCount="indefinite" calcMode="linear" ><mpath href="#b-arch"/></animateMotion></circle><circle class="b-particle p-peach" r="5"><animateMotion dur="7s" begin="-4.6s" repeatCount="indefinite" calcMode="linear" ><mpath href="#b-arch"/></animateMotion></circle><circle class="b-particle p-navy" r="5"><animateMotion dur="7s" begin="-5.8s" repeatCount="indefinite" calcMode="linear" keyPoints="1;0" keyTimes="0;1" ><mpath href="#b-arch"/></animateMotion></circle></g>
+            <a class="b-node n-green" href="#bridge-phd" data-key="phd" aria-label="PhDs and postdocs"><circle class="b-glow" cx="150" cy="147" r="34"/><circle class="b-dot" cx="150" cy="147" r="26"/><g class="b-icon" transform="translate(150 147)"><path d="M-12 -4 0 -10 12 -4 0 2z"/><path d="M-7 -1v6c0 2 3.5 3.5 7 3.5s7-1.5 7-3.5v-6"/><path d="M12 -4v7"/></g></a>
+            <a class="b-node n-peach n-logo" href="#bridge-both" data-key="both" aria-label="At PhireD"><circle class="b-glow" cx="450" cy="85" r="40"/><circle class="b-dot" cx="450" cy="85" r="34"/><image href="images/brand/phired-emblem.png" x="424" y="64" width="52" height="42" preserveAspectRatio="xMidYMid meet"/></a>
+            <a class="b-node n-navy" href="#bridge-co" data-key="co" aria-label="Companies"><circle class="b-glow" cx="750" cy="147" r="34"/><circle class="b-dot" cx="750" cy="147" r="26"/><g class="b-icon" transform="translate(750 147)"><path d="M-11 11V-2l6 4v-4l6 4V-11h8v22z"/></g></a>
+          </svg>
+        </figure>
+        <ul class="bridge-cards">
+          <li class="b-card c-green" id="bridge-phd" data-key="phd">
+            <span class="b-card-kicker">Academia side</span>
             <h3>For PhDs and postdocs</h3>
-            <p>Find jobs and internships in industry, during your PhD or after you graduate.</p>
+            <p>Explore jobs and internships in industry, during your PhD or after you graduate.</p>
+            <ul>
+              <li>Talk research with scientists and engineers, not only recruiters</li>
+              <li>Meet funding agencies and research institutes</li>
+              <li>Free entry</li>
+            </ul>
+            <a href="companies.html">Browse exhibitors <b aria-hidden="true">→</b></a>
           </li>
-          <li>
-            <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M17 26l-7 7a5 5 0 0 1-7-7l9-9a5 5 0 0 1 7 0"/><path d="M31 22l7-7a5 5 0 0 1 7 7l-9 9a5 5 0 0 1-7 0"/><path d="M18 30l12-12"/></svg>
-            <h3>For both</h3>
-            <p>Start conversations that can lead to collaborations, industrial PhD projects and joint research.</p>
+          <li class="b-card c-peach" id="bridge-both" data-key="both">
+            <h3>At PhireD</h3>
+            <p>Meet people face to face. A good conversation can be the start of an internship, a job or a research collaboration.</p>
+            <ul>
+              <li>Free workshops in the weeks before the fair</li>
+              <li>Fika and networking on the day</li>
+            </ul>
+            <a href="#workshops">Get ready with our workshops <b aria-hidden="true">→</b></a>
+          </li>
+          <li class="b-card c-navy" id="bridge-co" data-key="co">
+            <span class="b-card-kicker">Industry side</span>
+            <h3>For companies and funders</h3>
+            <p>Meet doctoral researchers in person, and see the research directions coming out of KTH.</p>
+            <ul>
+              <li>Talk with PhD students and postdocs</li>
+              <li>Send us a short description of your research, and we'll share it on our exhibitors page</li>
+              <li>Free base package in 2027, with Silver and Gold options</li>
+            </ul>
+            <a href="exhibit.html">See packages <b aria-hidden="true">→</b></a>
           </li>
         </ul>
       </div>
@@ -116,38 +153,11 @@
       <div class="wrap">
         <h2 id="photos-title">PhireD in pictures</h2>
         <div class="mosaic">
-          <figure class="photo photo-big"><img src="images/2026/smhi.jpg" alt="PhD students talking with SMHI researchers at their booth, one carrying a PhireD tote bag" loading="lazy"></figure>
-          <figure class="photo photo-wide"><img src="images/2026/crowd.jpg" alt="A crowd of PhD students on the fair floor, with the Huawei booth behind them" loading="lazy"></figure>
-          <figure class="photo"><img style="object-position: 30% 40%" src="images/2026/venturecup.jpg" alt="Conversations by the Venture Cup booth, with green and yellow balloons" loading="lazy"></figure>
-          <figure class="photo"><img style="object-position: 50% 85%" src="images/2026/fika.jpg" alt="Attendees chatting over coffee and cinnamon buns" loading="lazy"></figure>
+          <figure class="photo photo-big"><img src="images/photos/2026/smhi.jpg" alt="PhD students talking with SMHI researchers at their booth, one carrying a PhireD tote bag" loading="lazy"></figure>
+          <figure class="photo photo-wide"><img src="images/photos/2026/crowd.jpg" alt="A crowd of PhD students on the fair floor, with the Huawei booth behind them" loading="lazy"></figure>
+          <figure class="photo"><img style="object-position: 30% 40%" src="images/photos/2026/venturecup.jpg" alt="Conversations by the Venture Cup booth, with green and yellow balloons" loading="lazy"></figure>
+          <figure class="photo"><img style="object-position: 50% 85%" src="images/photos/2026/fika.jpg" alt="Attendees chatting over coffee and cinnamon buns" loading="lazy"></figure>
         </div>
-      </div>
-    </section>
-
-    <!-- AUDIENCES -->
-    <section class="section audiences">
-      <div class="wrap split">
-        <article class="panel panel-light" id="phds">
-          <svg class="panel-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M4 18 24 8l20 10-20 10z"/><path d="M12 22v10c0 3 6 6 12 6s12-3 12-6V22"/><path d="M44 18v12"/></svg>
-          <h2>For PhDs and postdocs</h2>
-          <ul>
-            <li>Talk research with scientists and engineers, not only recruiters</li>
-            <li>Meet funding agencies and research institutes</li>
-            <li>Join our workshops in the weeks before the fair</li>
-          </ul>
-          <a class="btn" href="companies.html">Browse exhibitors</a>
-        </article>
-
-        <article class="panel panel-dark" id="companies">
-          <svg class="panel-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 42V18l12 8v-8l12 8V8h12v34z"/><path d="M14 34h4M24 34h4M34 34h4"/></svg>
-          <h2>For companies and funders</h2>
-          <ul>
-            <li>Meet 1,600+ PhD Chapter members from all five KTH schools</li>
-            <li>Bring your R&amp;D team and publish a research profile</li>
-            <li>Free base package in 2027, with Silver and Gold options</li>
-          </ul>
-          <a class="btn btn-invert" href="exhibit.html">See packages</a>
-        </article>
       </div>
     </section>
 
@@ -172,39 +182,14 @@
     <section class="section" id="workshops">
       <div class="wrap">
         <h2>Workshops and the fair</h2>
-        <p class="section-intro">Free workshops in January to get you ready, then the fair on 2 February. Click a marked day to jump to it.</p>
+        <p class="section-intro">Free workshops in January to get you ready, then the fair on 2 February.</p>
         <div class="cal-wrap">
           <div class="cal" aria-label="Workshop calendar">
             <p class="cal-title" id="cal-title"></p>
             <div class="cal-grid" id="cal-grid"></div>
-            <p class="cal-legend"><span class="key key-ws"></span>Workshop <span class="key key-fair"></span>Career fair</p>
           </div>
           <ol class="workshops" id="workshop-list"></ol>
         </div>
-      </div>
-    </section>
-
-    <!-- WHAT'S ON -->
-    <section class="section" id="whats-on">
-      <div class="wrap">
-        <h2>On the day</h2>
-        <ul class="features">
-          <li>
-            <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="16" cy="16" r="6"/><circle cx="32" cy="16" r="6"/><path d="M4 40c0-7 5-12 12-12s12 5 12 12M20 40c0-7 5-12 12-12s12 5 12 12"/></svg>
-            <h3>Exhibitor floor</h3>
-            <p>Industry, start-ups, institutes and funders, all on one floor.</p>
-          </li>
-          <li>
-            <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 15h8l3-5h14l3 5h8v24H6z"/><circle cx="24" cy="26" r="7"/></svg>
-            <h3>Photo booth</h3>
-            <p>A professional headshot for your LinkedIn profile.</p>
-          </li>
-          <li>
-            <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 18h26v12a10 10 0 0 1-10 10h-6A10 10 0 0 1 8 30z"/><path d="M34 21h3a5 5 0 0 1 0 10h-3M16 6c-2 3 2 5 0 8M24 6c-2 3 2 5 0 8"/></svg>
-            <h3>Fika</h3>
-            <p>Coffee and cinnamon buns. Networking works better with sugar.</p>
-          </li>
-        </ul>
       </div>
     </section>
 
@@ -299,10 +284,10 @@
 
     <div class="wrap footer-top">
       <div class="footer-about">
-        <img class="footer-logo" src="images/phired-logo-wide.png" alt="PhireD" width="131" height="36">
+        <img class="footer-logo" src="images/brand/phired-logo-wide.png" alt="PhireD" width="131" height="36">
         <p>The career fair for PhD students and postdocs at KTH. Organised by PhDs, for PhDs.</p>
         <a class="footer-chapter" href="https://www.dr.kth.se/">
-          <img src="images/phd-chapter-logo.png" alt="" width="28" height="32">
+          <img src="images/brand/phd-chapter-logo.png" alt="" width="28" height="32">
           <span>Dr/THS, the PhD Chapter at KTH</span>
         </a>
       </div>
@@ -328,7 +313,7 @@
     </div>
   </footer>
 
-  <script src="data/companies.js?v=20261113-13"></script>
-  <script src="js/site.js?v=20261113-13"></script>
+  <script src="data/companies.js?v=20261113-20"></script>
+  <script src="js/site.js?v=20261113-20"></script>
 </body>
 </html>

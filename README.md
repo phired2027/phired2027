@@ -12,7 +12,9 @@ Event website, served at https://phired.se via GitHub Pages.
 | `js/site.js` | Event time, registration link, workshops and sign-up settings at the top; page code below |
 | `style/style.css` | Styles |
 | `fonts/` | Self-hosted fonts (Bricolage Grotesque, Instrument Sans; SIL Open Font License) |
-| `images/` | Favicon, PhireD and PhD Chapter logos, 2026 photos |
+| `images/brand/` | PhireD and PhD Chapter logos, emblem, favicon, link-preview image (`og.jpg`). `originals/` holds the source files |
+| `images/photos/2026/` | Photos from PhireD 2026 |
+| `images/exhibitors/` | Exhibitor logos used by the site. `originals/` holds the files as received |
 | `CNAME` | Custom domain for GitHub Pages. Keep this file |
 
 ## Quick edits
@@ -21,7 +23,7 @@ Event website, served at https://phired.se via GitHub Pages.
 - **Registration:** paste the KTH registration form link into `REGISTRATION_URL` at the top of `js/site.js`. Until then the Register buttons say "Registration opens soon".
 - **Workshops calendar:** the `WORKSHOPS` list at the top of `js/site.js`. Each has a date, time, place, title, text and a `signup` link. The dates there now are placeholders.
 - **Organising committee:** the "PhireD 2027 committee" list in the footer. The footer is repeated in all four HTML files, so edit it in each.
-- **Photos:** `images/2026/`. Landscape, about 1600px wide, under 400 KB each. `images/og.jpg` (1200x630) is the link preview image.
+- **Photos:** `images/photos/2026/`. Landscape, about 1600px wide, under 400 KB each. `images/brand/og.jpg` (1200x630) is the link preview image.
 - **Exhibitors:** `data/companies.js` has one list per year. `PHIRED_EXHIBITORS[2027]` fills the 2027 tab (empty shows "coming soon"); `PHIRED_EXHIBITORS[2026]` fills the 2026 tab and the front-page wall.
 
 - **After changing CSS or JS:** bump the `?v=...` number on the `style.css`, `site.js` and `companies.js` links in the HTML files, so browsers fetch the new version instead of an old cached one.
@@ -32,7 +34,7 @@ Search the files for `TODO` to find placeholders that still need real content.
 
 1. Open `data/companies.js` and copy one `{ ... }` block into the right year's list (including the comma between blocks).
 2. Fill in the fields; leave any text as `""` to hide it. Use `sponsor: "Silver sponsor"` etc. for sponsors.
-3. Optional logo: put it in `images/logos/` and set `logo: "images/logos/name.svg"`. Without it, the name is shown. SVG or a wide PNG on a transparent background works best. The current logos are from Wikimedia Commons.
+3. Optional logo: put it in `images/exhibitors/` and set `logo: "images/exhibitors/name.svg"`. Without it, the name is shown. SVG or a wide PNG on a transparent background works best, trimmed to the logo with no extra margin. Keep the file you received in `images/exhibitors/originals/`.
 
 ## Connecting the reminder sign-up to a Google Form
 

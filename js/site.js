@@ -430,7 +430,8 @@ function slug(s) {
 
   var items = WORKSHOPS.slice().sort(function (a, b) { return a.date.localeCompare(b.date); });
   var byDate = {};
-  items.forEach(function (w, i) { w.id = 'ws-' + i; (byDate[w.date] = byDate[w.date] || []).push(w); });
+  // Each workshop gets an accent colour (ac0-ac4 in style.css), shared by its calendar day and its card.
+  items.forEach(function (w, i) { w.id = 'ws-' + i; w.ac = 'ac' + (i % 5); (byDate[w.date] = byDate[w.date] || []).push(w); });
 
   function toDate(isoDate) { var p = isoDate.split('-'); return new Date(Date.UTC(+p[0], +p[1] - 1, +p[2])); }
   function iso(dt) { return dt.toISOString().slice(0, 10); }
@@ -462,7 +463,7 @@ function slug(s) {
       }
       var ws = byDate[key];
       if (ws) {
-        html += '<button type="button" class="cal-day cal-ws" data-target="' + ws[0].id + '" aria-label="' + esc(nice(key) + ': ' + ws.map(function (w) { return w.title; }).join(', ')) + '">' + d + '</button>';
+        html += '<button type="button" class="cal-day cal-ws ' + ws[0].ac + '" data-target="' + ws[0].id + '" aria-label="' + esc(nice(key) + ': ' + ws.map(function (w) { return w.title; }).join(', ')) + '">' + d + '</button>';
       } else if (key === FAIR) {
         html += '<button type="button" class="cal-day cal-fair" data-target="ws-fair" aria-label="' + esc(nice(key)) + ': PhireD career fair">' + d + '</button>';
       } else {
@@ -480,7 +481,7 @@ function slug(s) {
     var btn = w.signup
       ? '<a class="ws-btn" href="' + esc(w.signup) + '" target="_blank" rel="noopener">Sign up<span class="visually-hidden"> for ' + esc(w.title) + ' (opens in a new tab)</span></a>'
       : '<span class="ws-btn ws-soon">Sign-up soon</span>';
-    return '<li class="ws" id="' + w.id + '" tabindex="-1">' +
+    return '<li class="ws ' + w.ac + '" id="' + w.id + '" tabindex="-1">' +
       '<p class="ws-when"><time datetime="' + w.date + '">' + esc(nice(w.date)) + '</time>' + (w.time ? ' · ' + esc(w.time) : '') + (w.place ? ' · ' + esc(w.place) : '') + '</p>' +
       '<div class="ws-head"><h3>' + esc(w.title) + '</h3>' + btn + '</div>' +
       '<p>' + esc(w.text) + '</p></li>';
@@ -496,6 +497,24 @@ function slug(s) {
     el.focus({ preventScroll: true });
   });
   draw();
+
+  // Hovering (or focusing) a card makes its calendar day pop, and the other way round.
+  function link(id, on) {
+    var day = grid.querySelector('[data-target="' + id + '"]');
+    var card = document.getElementById(id);
+    if (day) day.classList.toggle('cal-pop', on);
+    if (card) card.classList.toggle('ws-hl', on);
+  }
+  [['mouseover', true], ['mouseout', false], ['focusin', true], ['focusout', false]].forEach(function (ev) {
+    list.addEventListener(ev[0], function (e) {
+      var card = e.target.closest('.ws');
+      if (card && !(ev[1] === false && card.contains(e.relatedTarget))) link(card.id, ev[1]);
+    });
+    grid.addEventListener(ev[0], function (e) {
+      var day = e.target.closest('[data-target]');
+      if (day && !(ev[1] === false && day.contains(e.relatedTarget))) link(day.getAttribute('data-target'), ev[1]);
+    });
+  });
 })();
 
 /* ------------------------------------------------------------------
@@ -511,4 +530,48 @@ function slug(s) {
     var t = items[i]; items[i] = items[j]; items[j] = t;
   }
   items.forEach(function (li) { ul.appendChild(li); });
+})();
+
+/* ------------------------------------------------------------------
+   BRIDGE (index.html): draws in when scrolled into view; hovering a
+   card lights its point on the bridge, clicking a point lights its card.
+------------------------------------------------------------------- */
+(function bridge() {
+  var fig = document.getElementById('bridge-fig');
+  if (!fig) return;
+  var section = fig.closest('section');
+  var svg = fig.querySelector('svg');
+  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (still) {
+    if (svg.pauseAnimations) svg.pauseAnimations();
+    section.classList.add('b-still');
+  } else if ('IntersectionObserver' in window) {
+    section.classList.add('b-anim');
+    var io = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) { section.classList.add('b-in'); io.disconnect(); }
+    }, { threshold: 0.25 });
+    io.observe(fig);
+  }
+
+  function light(key, on) {
+    section.querySelectorAll('[data-key="' + key + '"]').forEach(function (el) { el.classList.toggle('is-on', on); });
+  }
+  section.querySelectorAll('.b-card, .b-node').forEach(function (el) {
+    var key = el.getAttribute('data-key');
+    el.addEventListener('mouseenter', function () { light(key, true); });
+    el.addEventListener('mouseleave', function () { light(key, false); });
+    el.addEventListener('focusin', function () { light(key, true); });
+    el.addEventListener('focusout', function () { light(key, false); });
+  });
+  section.querySelectorAll('.b-node').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      var key = a.getAttribute('data-key');
+      var card = document.getElementById('bridge-' + key);
+      light(key, true);
+      card.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'nearest' });
+      setTimeout(function () { light(key, false); }, 1600);
+    });
+  });
 })();
