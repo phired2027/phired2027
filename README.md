@@ -21,7 +21,7 @@ Event website, served at https://phired.se via GitHub Pages.
 
 - **Event date / countdown:** top of `js/site.js` (`EVENT.start`, `EVENT.end`). The date, time and venue in the hero, FAQ and footer are plain text in the HTML files.
 - **Registration:** paste the KTH registration form link into `REGISTRATION_URL` at the top of `js/site.js`. Until then the Register buttons say "Registration opens soon".
-- **Workshops calendar:** the `WORKSHOPS` list at the top of `js/site.js`. Each has a date, time, place, title, text and a `signup` link. The dates there now are placeholders.
+- **Workshops calendar:** the `WORKSHOPS` list at the top of `js/site.js`. Each has a date, time, place, title, text and a `signup` link. The workshops are commented out until they're confirmed: remove the `//` in front of each entry (and set the real dates) to publish them. With no workshops, the calendar shows the fair's month and a "will be published" note.
 - **Organising committee:** the "Organising committee" section at the end of `index.html` (front page only). The order is shuffled on every page load.
 - **Photos:** `images/photos/2026/`. Landscape, about 1600px wide, under 400 KB each. `images/brand/og.jpg` (1200x630) is the link preview image.
 - **Exhibitors:** `data/companies.js` has one list per year. `PHIRED_EXHIBITORS[2027]` fills the 2027 tab (empty shows "coming soon"); `PHIRED_EXHIBITORS[2026]` fills the 2026 tab and the front-page wall.

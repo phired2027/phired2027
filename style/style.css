@@ -1164,3 +1164,7 @@ a.ws-btn-fair:hover { background: #f99a52; }
 /* Organising committee: now its own band at the end of the front page (same look as before) */
 .team-band { background: var(--white); padding: 48px 0 52px; border-top: 1px solid var(--line); }
 .team-band .footer-crew { margin: 0; padding: 0; border: 0; }
+
+/* Calendar note while workshops are not yet published */
+.ws-note { padding: 16px 20px; border: 1.5px dashed #d6cfc4; border-radius: 18px; color: var(--ink-soft); font-size: 0.98rem; background: transparent; }
+.cal-dow { padding-bottom: 12px; }

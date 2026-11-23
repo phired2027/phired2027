@@ -4,7 +4,7 @@
    EVENT DATE AND TIME (drives the countdown on the front page)
 ------------------------------------------------------------------- */
 var EVENT = {
-  start: "2027-02-02T13:00:00+01:00",
+  start: "2027-02-02T12:00:00+01:00",
   end:   "2027-02-02T15:00:00+01:00"
 };
 
@@ -25,37 +25,39 @@ var REGISTRATION_URL = "";
              show "Sign-up opens soon".
    TODO: the dates below are placeholders. Replace them with the real ones.
 ------------------------------------------------------------------- */
+// Workshops are not confirmed yet, so the list is empty for now and the calendar shows only the fair.
+// To publish them, remove the "//" in front of each entry below (and fix the dates).
 var WORKSHOPS = [
-  {
-    date: "2027-01-13", time: "17:00–18:30", place: "",
-    title: "CV workshop",
-    text: "Turn your thesis and publications into a CV that industry recruiters understand.",
-    signup: ""
-  },
-  {
-    date: "2027-01-18", time: "17:00–18:30", place: "",
-    title: "Job seeking in Sweden for international researchers",
-    text: "How the Swedish job market works, where jobs are posted, and what to know about permits and language.",
-    signup: ""
-  },
-  {
-    date: "2027-01-21", time: "17:00–18:30", place: "",
-    title: "Panel: academia, industry or a new direction?",
-    text: "PhDs who stayed in academia, moved to industry or changed field entirely share how they decided.",
-    signup: ""
-  },
-  {
-    date: "2027-01-25", time: "17:00–18:30", place: "",
-    title: "Pitch your research",
-    text: "Practise explaining your research in one minute, so it lands with someone from outside your field.",
-    signup: ""
-  },
-  {
-    date: "2027-01-28", time: "17:00–18:30", place: "",
-    title: "Networking with confidence",
-    text: "The psychology of networking: starting conversations, handling nerves and following up afterwards.",
-    signup: ""
-  }
+  // {
+  //   date: "2027-01-13", time: "17:00–18:30", place: "",
+  //   title: "CV workshop",
+  //   text: "Turn your thesis and publications into a CV that industry recruiters understand.",
+  //   signup: ""
+  // },
+  // {
+  //   date: "2027-01-18", time: "17:00–18:30", place: "",
+  //   title: "Job seeking in Sweden for international researchers",
+  //   text: "How the Swedish job market works, where jobs are posted, and what to know about permits and language.",
+  //   signup: ""
+  // },
+  // {
+  //   date: "2027-01-21", time: "17:00–18:30", place: "",
+  //   title: "Panel: academia, industry or a new direction?",
+  //   text: "PhDs who stayed in academia, moved to industry or changed field entirely share how they decided.",
+  //   signup: ""
+  // },
+  // {
+  //   date: "2027-01-25", time: "17:00–18:30", place: "",
+  //   title: "Pitch your research",
+  //   text: "Practise explaining your research in one minute, so it lands with someone from outside your field.",
+  //   signup: ""
+  // },
+  // {
+  //   date: "2027-01-28", time: "17:00–18:30", place: "",
+  //   title: "Networking with confidence",
+  //   text: "The psychology of networking: starting conversations, handling nerves and following up afterwards.",
+  //   signup: ""
+  // }
 ];
 
 /* ------------------------------------------------------------------
@@ -443,9 +445,13 @@ function slug(s) {
   // From the week of the first workshop to the week of the fair. Each month gets its own
   // heading row, and its days start in the right weekday column, so every month looks the same.
   function draw() {
-    var from = monday(toDate(items.length ? items[0].date : FAIR));
-    var to = new Date(monday(toDate(FAIR)).getTime() + 6 * DAY);
+    var fair = toDate(FAIR);
+    var monthStart = new Date(Date.UTC(fair.getUTCFullYear(), fair.getUTCMonth(), 1));
+    var monthEnd = new Date(Date.UTC(fair.getUTCFullYear(), fair.getUTCMonth() + 1, 0));
+    var from = items.length ? monday(toDate(items[0].date)) : monthStart;
+    var to = items.length ? new Date(monday(fair).getTime() + 6 * DAY) : monthEnd;
     var m1 = from.getUTCMonth(), m2 = to.getUTCMonth();
+    var multi = m1 !== m2; // month labels only when the calendar spans more than one month
     title.textContent = MONTHS[m1] + (m1 !== m2 ? ' – ' + MONTHS[m2] : '') + ' ' + to.getUTCFullYear();
 
     var html = DAYS.map(function (d) { return '<span class="cal-dow" aria-hidden="true">' + d + '</span>'; }).join('');
@@ -458,7 +464,7 @@ function slug(s) {
         // close the previous month's last row, then start the new month on its own row
         if (month !== -1 && col > 0) for (var p = col; p < 7; p++) html += '<span class="cal-day cal-pad" aria-hidden="true"></span>';
         month = dt.getUTCMonth();
-        html += '<span class="cal-month">' + MONTHS[month] + '</span>';
+        if (multi) html += '<span class="cal-month">' + MONTHS[month] + '</span>';
         for (var q = 0; q < col; q++) html += '<span class="cal-day cal-pad" aria-hidden="true"></span>';
       }
       var ws = byDate[key];
@@ -473,7 +479,7 @@ function slug(s) {
     grid.innerHTML = html;
   }
 
-  var fairItem = '<li class="ws ws-fair" id="ws-fair" tabindex="-1"><p class="ws-when"><time datetime="' + FAIR + '">' + esc(nice(FAIR)) + '</time> · 13:00–15:00 · Nymble, KTH Campus</p>' +
+  var fairItem = '<li class="ws ws-fair" id="ws-fair" tabindex="-1"><p class="ws-when"><time datetime="' + FAIR + '">' + esc(nice(FAIR)) + '</time> · 12:00–15:00 · Nymble, KTH Campus</p>' +
     '<div class="ws-head"><h3>PhireD career fair</h3><a class="ws-btn ws-btn-fair" href="#register-now">Register</a></div>' +
     '<p>The main event: meet the exhibitors.</p></li>';
 
@@ -485,7 +491,8 @@ function slug(s) {
       '<p class="ws-when"><time datetime="' + w.date + '">' + esc(nice(w.date)) + '</time>' + (w.time ? ' · ' + esc(w.time) : '') + (w.place ? ' · ' + esc(w.place) : '') + '</p>' +
       '<div class="ws-head"><h3>' + esc(w.title) + '</h3>' + btn + '</div>' +
       '<p>' + esc(w.text) + '</p></li>';
-  }).join('') + fairItem;
+  }).join('') + fairItem +
+    (items.length ? '' : '<li class="ws-note">Workshops and other events will be published here once they are confirmed.</li>');
 
   grid.addEventListener('click', function (e) {
     var b = e.target.closest('[data-target]');

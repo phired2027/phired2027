@@ -255,7 +255,7 @@ window.PHIRED_EXHIBITORS[2026] = [
   },
   {
     name: "Vattenfall",
-    logo: "images/exhibitors/vattenfall.svg",
+    logo: "images/exhibitors/vattenfall.png",
     type: "Company",
     areas: ["Energy and nuclear"],
     oneLiner: "Energy company producing and selling electricity and heat.",
